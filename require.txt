@@ -1,3 +1,6 @@
 screen where put interest and saldo
-schedule the customer
+schedule the customer{
+  direccion,dni, cuil,lugar de trabajo, puesto
+}
+
 resume over month
