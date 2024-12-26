@@ -7,6 +7,8 @@
 body {
     background-color: #BBB;
     padding: 5px;
+    height: 720px;
+    width: 995px;
 }
 
 input::-webkit-outer-spin-button,
@@ -17,10 +19,8 @@ input::-webkit-inner-spin-button {
 
 main {
     display: flex;
-    justify-content: space-between;
     padding: 20px;
-    height: 768px;
-    width: 1024px;
+    height: 99dvh;
 }
 
 aside {
