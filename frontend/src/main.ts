@@ -31,7 +31,7 @@ const tbodyPrestamo = $("tbodyPrestamo");
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
-  <td>${Client.Name + "" + Client.Last_Name}</td>
+  <td>${Client.Name + " " + Client.Last_Name}</td>
   <td>${Client.Address}</td>
   <td>${Client.Phone}</td>
   <td>${Client.Email}</td>
@@ -84,15 +84,15 @@ const createClient = () => {
     inptJob
   ) {
     SaveClient(
-      inptName.value,
-      inptLastName.value,
-      inptAddress.value,
+      inptName.value.toLowerCase(),
+      inptLastName.value.toLowerCase(),
+      inptAddress.value.toLowerCase(),
       inptPhone.value.toString(),
-      inptEmail.value,
+      inptEmail.value.toLowerCase(),
       inptDNI.value.toString(),
       inptCUIL.value.toString(),
-      inptEmpresa.value,
-      inptJob.value
+      inptEmpresa.value.toLowerCase(),
+      inptJob.value.toLowerCase()
     );
     inptName.value = "";
     inptLastName.value = "";

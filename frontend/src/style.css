@@ -131,6 +131,10 @@ section {
         padding: 10px;
     }
 
+    ::first-letter {
+        transform: capitalize;
+    }
+
     th {
         background-color: #333;
         color: #fff;
@@ -154,6 +158,7 @@ section {
         border: 1px solid #ccc;
         padding: 10px;
     }
+
 
     th {
         background-color: #333;

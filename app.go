@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"prestamos/internal/models"
+	"sort"
 
 	"github.com/FedericoIglesias/local_db"
 )
@@ -51,6 +52,8 @@ func (a *App) GetAllClient() []models.Client {
 		}
 		listClient = append(listClient, *c)
 	}
+
+	sort.Slice(listClient, func(i, j int) bool { return listClient[i].Name < listClient[j].Name })
 
 	return listClient
 }
