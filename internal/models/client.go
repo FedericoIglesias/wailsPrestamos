@@ -2,11 +2,14 @@ package models
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/FedericoIglesias/local_db"
+	"github.com/google/uuid"
 )
 
 type Client struct {
+	ID        string
 	Name      string
 	Last_Name string
 	Address   string
@@ -20,6 +23,7 @@ type Client struct {
 
 func NewClient(name, last_name, address, phone, email, dni, cuil, empresa, job string) *Client {
 	return &Client{
+		ID:        uuid.New().String(),
 		Name:      name,
 		Last_Name: last_name,
 		Address:   address,
@@ -37,11 +41,6 @@ func (c *Client) SaveClient() {
 	if err != nil {
 		panic(err)
 	}
-
-	driver.Write("clients", c.DNI.String(), c)
-
-}
-
-func (c *Client) UpdateClient() {
-
+	fmt.Printf("%v", c)
+	driver.Write("clients", c.ID, c)
 }

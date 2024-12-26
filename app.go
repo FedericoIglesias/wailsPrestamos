@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"prestamos/internal/models"
+
+	"github.com/FedericoIglesias/local_db"
 )
 
 // App struct
@@ -24,4 +27,30 @@ func NewApp() *App {
 func (a *App) SaveClient(Name, LastName, Address, Phone, Email, DNI, CUIL, Empresa, Job string) {
 	client := models.NewClient(Name, LastName, Address, Phone, Email, DNI, CUIL, Empresa, Job)
 	client.SaveClient()
+}
+
+func (a *App) GetAllClient() []models.Client {
+	driver, err := local_db.New("./db", nil)
+
+	if err != nil {
+		panic(err)
+	}
+
+	listClient := []models.Client{}
+
+	records, err := driver.ReadAll("clients")
+
+	if err != nil {
+		panic(err)
+	}
+
+	for _, client := range records {
+		c := &models.Client{}
+		if err := json.Unmarshal([]byte(client), &c); err != nil {
+			panic(err)
+		}
+		listClient = append(listClient, *c)
+	}
+
+	return listClient
 }

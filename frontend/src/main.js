@@ -1,4 +1,4 @@
-import { SaveClient } from "../wailsjs/go/main/App.js";
+import { SaveClient, GetAllClient } from "../wailsjs/go/main/App.js";
 const $ = (id) => document.getElementById(id);
 const $$ = (name) => document.querySelector(name);
 const addClient = $("add-client");
@@ -27,6 +27,15 @@ const inptEmpresa = $('inptEmpresa')
 const inptJob = $('inptJob')
 const tbodyClient = $('tbodyClient')
 const tbodyPrestamo = $('tbodyPrestamo')
+
+async function InitTableClient() {
+  GetAllClient().then((data) => {
+    data.map(client => {
+      const row = createRowClient(client.name, client.lastName, client.address, client.phone, client.email, client.dni, client.cuil, client.empresa, client.job)
+      tbodyClient.appendChild(document.createElement('tr')).innerHTML = row
+    })
+  })
+}
 
 const createRowClient = (name, lastName, address, phone, email, dni, cuil, empresa, job) => {
   return `<tr>
@@ -151,3 +160,5 @@ sectionAddPrestamo.addEventListener("keypress", (e) => {
     checkPrestamo()
   }
 })
+
+InitTableClient()
