@@ -1,6 +1,6 @@
+import { SaveClient } from "../wailsjs/go/main/App.js";
 const $ = (id) => document.getElementById(id);
 const $$ = (name) => document.querySelector(name);
-
 const addClient = $("add-client");
 const addPrestamo = $("add-prestamo");
 const tablePrestamo = $("table-prestamo");
@@ -50,11 +50,10 @@ const createRowPrestamo = (Amount, Interest, Cuota, Date, Client) => {
   </tr>`
 }
 
-
-
 const createClient = () => {
   const row = createRowClient(inptName.value, inptLastName.value, inptAddress.value, inptPhone.value, inptEmail.value, inptDNI.value, inptCUIL.value, inptEmpresa.value, inptJob.value)
   tbodyClient.appendChild(document.createElement('tr')).innerHTML = row
+  SaveClient(inptName.value, inptLastName.value, inptAddress.value, inptPhone.value.toString(), inptEmail.value, inptDNI.value.toString(), inptCUIL.value.toString(), inptEmpresa.value, inptJob.value)
   inptName.value = ""
   inptLastName.value = ""
   inptAddress.value = ""
