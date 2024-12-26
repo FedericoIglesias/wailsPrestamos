@@ -28,14 +28,7 @@ const inptJob = $('inptJob')
 const tbodyClient = $('tbodyClient')
 const tbodyPrestamo = $('tbodyPrestamo')
 
-async function InitTableClient() {
-  GetAllClient().then((data) => {
-    data.map(client => {
-      const row = createRowClient(client.name, client.lastName, client.address, client.phone, client.email, client.dni, client.cuil, client.empresa, client.job)
-      tbodyClient.appendChild(document.createElement('tr')).innerHTML = row
-    })
-  })
-}
+
 
 const createRowClient = (name, lastName, address, phone, email, dni, cuil, empresa, job) => {
   return `<tr>
@@ -57,6 +50,15 @@ const createRowPrestamo = (Amount, Interest, Cuota, Date, Client) => {
   <td>${Date}</td>
   <td>${Client}</td>
   </tr>`
+}
+
+const InitTableClient = async () => {
+  GetAllClient().then((data) => {
+    data.map(client => {
+      const row = createRowClient(client.Address, client.CUIL, client.DNI, client.Email, client.Empresa, client.ID, client.Job, client.Last_Name, client.Name, client.Phone,)
+      tbodyClient.appendChild(document.createElement('tr')).innerHTML = row
+    })
+  })
 }
 
 const createClient = () => {
