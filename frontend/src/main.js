@@ -25,6 +25,21 @@ const inptDNI = $('inptDNI')
 const inptCUIL = $('inptCUIL')
 const inptEmpresa = $('inptEmpresa')
 const inptJob = $('inptJob')
+const tbodyClient = $('tbodyClient')
+const tbodyPrestamo = $('tbodyPrestamo')
+
+const createRowClient = (name, lastName, address, phone, email, dni, cuil, empresa, job) => {
+  return `<tr>
+  <td>${name + '' + lastName}</td>
+  <td>${address}</td>
+  <td>${phone}</td>
+  <td>${email}</td>
+  <td>${dni}</td>
+  <td>${cuil}</td>
+  <td>${empresa}</td>
+  <td>${job}</td>
+  </tr>`
+}
 
 addClient.addEventListener("click", () => {
   sectionAddClient.style.display = "block";
@@ -60,13 +75,16 @@ btnPrestamo.addEventListener("click", () => {
 })
 
 btnClient.addEventListener("click", () => {
-  console.log(inptName.value)
-  console.log(inptLastName.value)
-  console.log(inptAddress.value)
-  console.log(inptPhone.value)
-  console.log(inptEmail.value)
-  console.log(inptDNI.value)
-  console.log(inptCUIL.value)
-  console.log(inptEmpresa.value)
-  console.log(inptJob.value)
+  const row = createRowClient(inptName.value, inptLastName.value, inptAddress.value, inptPhone.value, inptEmail.value, inptDNI.value, inptCUIL.value, inptEmpresa.value, inptJob.value)
+  tbodyClient.appendChild(document.createElement('tr')).innerHTML = row
+  inptName.value= ""
+  inptLastName.value= ""
+  inptAddress.value= ""
+  inptPhone.value= ""
+  inptEmail.value= ""
+  inptDNI.value= ""
+  inptCUIL.value= ""
+  inptEmpresa.value= ""
+  inptJob.value= ""
 })
+
