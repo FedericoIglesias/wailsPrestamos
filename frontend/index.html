@@ -6,59 +6,118 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Prestamos</title>
     <link href="./src/style.css" rel="stylesheet">
-
+    <style>
+    </style>
 </head>
 
 <body>
     <main>
         <aside>
             <ul>
-                <li>Agregar Cliente</li>
-                <li>Agregar Prestamo</li>
-                <li>Tabla Prestamos</li>
-                <li>Tabla Clientes</li>
-                <li></li>
-                <li></li>
+                <li id="add-prestamo">Agregar Prestamo</li>
+                <li id="add-client">Agregar Cliente</li>
+                <li id="table-client">Tabla Clientes</li>
+                <li id="table-prestamo">Tabla Prestamos</li>
             </ul>
         </aside>
-        <div action="">
-            <label for="">Monto</label>
-            <input type="number">
-            <label for="">Interes</label>
-            <input type="number">
-            <label for="">Interes</label>
-            <input type="number">
-            <label>Cliente</label>
-            <select name="" id="">
-                <option value="">Pepe</option>
-                <option value="">Toto</option>
-            </select>
-            <button>Agregar Prestamo</button>
-        </div>
-        <div>
-            <label for="">Nombre<span>*</span></label>
-            <input type="text">
-            <label for="">Apellido<span>*</span></label>
-            <input type="text">
-            <label for="">Dirección<span>*</span></label>
-            <input type="text">
-            <label for="">Teléfono<span>*</span></label>
-            <input type="number">
-            <label for="">Email</label>
-            <input type="text">
-            <label for="">D.N.I.<span>*</span></label>
-            <input type="number">
-            <label for="">CUIL<span>*</span></label>
-            <input type="number">
-            <label for="">Empresa</label>
-            <input type="text">
-            <label for="">Puesto <span>*</span></label>
-            <input type="text">
-            <button>Agregar Cliente</button>
-        </div>
+        <section class="add-prestamo display-none">
+            <div action="">
+                <label for="">Monto</label>
+                <input id="inputAmount" type="number">
+                <label for="">Interes</label>
+                <input id="inputInterest" type="number">
+                <label for="">Cuotas</label>
+                <input id="inputCuota" type="number">
+                <label for="">Fecha</label>
+                <input id="inputDate" type="date">
+                <label>Cliente</label>
+                <select id="selectClient">
+                    <option value=""></option>
+                    <option value="Pepe">Pepe</option>
+                    <option value="Toto">Toto</option>
+                </select>
+                <button id="btnPrestamo">Agregar Prestamo</button>
+            </div>
+        </section>
+        <section class="add-client display-none">
+            <div>
+                <label for="">Nombre<span>*</span></label>
+                <input id="inptName" type="text">
+                <label for="">Apellido<span>*</span></label>
+                <input id="inptLastName" type="text">
+                <label for="">Dirección<span>*</span></label>
+                <input id="inptAddress" type="text">
+                <label for="">Teléfono<span>*</span></label>
+                <input id="inptPhone" type="number">
+                <label for="">Email</label>
+                <input id="inptEmail" type="text">
+                <label for="">D.N.I.<span>*</span></label>
+                <input id="inptDNI" type="number">
+                <label for="">CUIL<span>*</span></label>
+                <input id="inptCUIL" type="number">
+                <label for="">Empresa</label>
+                <input id="inptEmpresa" type="text">
+                <label for="">Puesto <span>*</span></label>
+                <input id="inptJob" type="text">
+                <br>
+                <button id="btnClient">Agregar Cliente</button>
+            </div>
+        </section>
+        <section class="table-client">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Dirección</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>D.N.I.</th>
+                            <th>CUIL</th>
+                            <th>Empresa</th>
+                            <th>Puesto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pepe Argento</td>
+                            <td>Av. Siempreviva 742</td>
+                            <td>123456789</td>
+                            <td></td>
+                    </tbody>
+            </div>
+        </section>
+        <br>
+        <section class="table-prestamo display-none">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Monto</th>
+                            <th>Intereses</th>
+                            <th>Fecha</th>
+                            <th>Cuotas</th>
+                            <th>Adeuda</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pepe Argento</td>
+                            <td>1000</td>
+                            <td>3</td>
+                            <td>24/05/2025</td>
+                            <td>10</td>
+                            <td>100000</td>
+                            <td>Al día</td>
+                        </tr>
+                    </tbody>
+            </div>
+        </section>
     </main>
     <!-- <div id="app"></div> -->
-    <!-- <script src="./src/main.ts" type="module"></script> -->
+    <script src="./src/main.js" type="module"></script>
 </body>
 
 </html>

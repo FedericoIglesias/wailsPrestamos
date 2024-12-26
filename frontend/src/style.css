@@ -14,3 +14,162 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 768px;
+    width: 1024px;
+}
+
+aside {
+    width: 20%;
+    background-color: #f1f1f1;
+    padding: 20px;
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    li:hover {
+        background-color: #ccc;
+    }
+}
+
+section {
+    background-color: #f1f1f1;
+    width: 80%;
+}
+
+.add-client {
+    div {
+        padding: 20px;
+
+        span {
+            color: red;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 500px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #555;
+            }
+        }
+    }
+}
+
+.add-prestamo {
+    div {
+        padding: 20px;
+        background-color: #f1f1f1;
+
+        span {
+            color: red;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 500px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #555;
+            }
+        }
+    }
+}
+
+.table-prestamo {
+    border-collapse: collapse;
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f1f1f1;
+    }
+
+    tr:hover {
+        background-color: #ccc;
+    }
+}
+
+.table-client {
+    display: none;
+    border-collapse: collapse;
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f1f1f1;
+    }
+
+    tr:hover {
+        background-color: #ccc;
+    }
+}
+
+
+.display-none {
+    display: none;
+}
