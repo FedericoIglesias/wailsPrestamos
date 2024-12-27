@@ -25,9 +25,13 @@ func NewApp() *App {
 // 	a.ctx = ctx
 // }
 
-func (a *App) SaveClient(Name, LastName, Address, Phone, Email, DNI, CUIL, Empresa, Job string) {
-	client := models.NewClient(Name, LastName, Address, Phone, Email, DNI, CUIL, Empresa, Job)
-	client.SaveClient()
+func (a *App) SaveClient(Client models.Client) {
+	driver, err := local_db.New("./db", nil)
+
+	if err != nil {
+		panic(err)
+	}
+	driver.Write("client", Client.ID, Client)
 }
 
 func (a *App) GetAllClient() []models.Client {
@@ -59,7 +63,6 @@ func (a *App) GetAllClient() []models.Client {
 }
 
 func (a *App) SavePrestamo(prestamo models.Prestamo) {
-	// prestamo := models.NewPrestamo(prestamo.ID, Amount, Interest, Cuota, Date, ClientId)
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		panic(err)
