@@ -30,6 +30,28 @@ export namespace models {
 	        this.Job = source["Job"];
 	    }
 	}
+	export class Prestamo {
+	    ID: string;
+	    Amount: string;
+	    Interest: string;
+	    Cuota: string;
+	    Date: string;
+	    ClientId: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new Prestamo(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.ID = source["ID"];
+	        this.Amount = source["Amount"];
+	        this.Interest = source["Interest"];
+	        this.Cuota = source["Cuota"];
+	        this.Date = source["Date"];
+	        this.ClientId = source["ClientId"];
+	    }
+	}
 
 }
 

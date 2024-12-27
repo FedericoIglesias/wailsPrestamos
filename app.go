@@ -57,3 +57,13 @@ func (a *App) GetAllClient() []models.Client {
 
 	return listClient
 }
+
+func (a *App) SavePrestamo(prestamo models.Prestamo) {
+	// prestamo := models.NewPrestamo(prestamo.ID, Amount, Interest, Cuota, Date, ClientId)
+	driver, err := local_db.New("./db", nil)
+	if err != nil {
+		panic(err)
+	}
+
+	driver.Write("prestamos", prestamo.ID.String(), prestamo)
+}

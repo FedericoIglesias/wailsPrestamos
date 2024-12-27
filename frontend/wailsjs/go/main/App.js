@@ -9,3 +9,7 @@ export function GetAllClient() {
 export function SaveClient(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
   return window['go']['main']['App']['SaveClient'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 }
+
+export function SavePrestamo(arg1) {
+  return window['go']['main']['App']['SavePrestamo'](arg1);
+}

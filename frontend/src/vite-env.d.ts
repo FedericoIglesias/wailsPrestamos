@@ -10,5 +10,14 @@ export type Client = {
   DNI: string;
   CUIL: string;
   Empresa: string;
-  Job: string
-  }
+  Job: string;
+};
+
+export type prestamo = {
+  ID: string;
+  Amount: string;
+  Interest: string;
+  Cuota: string;
+  Date: string;
+  ClientId: string;
+};
