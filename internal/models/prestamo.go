@@ -9,7 +9,7 @@ type Prestamo struct {
 	Cuota    json.Number
 	Date     json.Number
 	ClientId string
-	CheckPay CheckPay
+	CheckPay []CheckPay
 }
 
 type PrestamoTable struct {

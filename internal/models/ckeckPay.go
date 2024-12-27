@@ -1,8 +1,8 @@
 package models
 
-import "encoding/json"
+
 
 type CheckPay struct {
-	Month json.Number
+	Month string
 	Pay   bool
 }

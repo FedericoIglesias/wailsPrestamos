@@ -121,6 +121,7 @@ const createPrestamo = () => {
     Date: new Date(inputDate.value).getTime().toString(),
     ClientId: selectClient.value,
   };
+  console.log("save PRestamo")
   SavePrestamo(prestamo);
 
   inputAmount.value = "";

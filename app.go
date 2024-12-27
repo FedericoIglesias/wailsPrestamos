@@ -62,7 +62,19 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 		panic(err)
 	}
 
-	driver.Write("prestamos", prestamo.ID, prestamo)
+	listCheckPay := FillMonth(prestamo.Date, prestamo.Cuota)
+
+	fmt.Printf("%v ", listCheckPay)
+
+	driver.Write("prestamos", prestamo.ID, &models.Prestamo{
+		ID:       prestamo.ID,
+		Amount:   prestamo.Amount,
+		Interest: prestamo.Interest,
+		Cuota:    prestamo.Cuota,
+		Date:     prestamo.Date,
+		ClientId: prestamo.ClientId,
+		CheckPay: listCheckPay,
+	})
 }
 
 func (a *App) GetAllPrestamoTable() []models.PrestamoTable {
@@ -110,20 +122,33 @@ func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client
 		}
 	}
 
-	FillMonth(listPrestamo[0].Date, listPrestamo[0].Cuota)
-
 	sort.Slice(listPrestamoTable, func(i, j int) bool { return listPrestamoTable[i].Date < listPrestamoTable[j].Date })
 	return listPrestamoTable
 }
 
-func FillMonth(Date json.Number, cuotas json.Number) { //[]models.CheckPay {
+func FillMonth(Date json.Number, cuotas json.Number) []models.CheckPay {
+	listCheckPay := []models.CheckPay{}
+
 	jsTime, err := Date.Int64()
 	if err != nil {
-		fmt.Errorf("%v ", err)
+		fmt.Printf("%v ", err)
 	}
 
 	t := time.Unix(jsTime/1000, 0)
 
-	fmt.Println(t.Month())
+	month := int64(t.Month())
 
+	for range cuotas {
+		if month+1 == 13 {
+			month = 0
+		}
+		month += 1
+		checkPay := models.CheckPay{
+			Month: fmt.Sprintf("%d", month),
+			Pay:   false,
+		}
+		listCheckPay = append(listCheckPay, checkPay)
+	}
+
+	return listCheckPay
 }
