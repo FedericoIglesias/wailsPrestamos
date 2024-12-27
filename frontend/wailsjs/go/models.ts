@@ -52,6 +52,30 @@ export namespace models {
 	        this.ClientId = source["ClientId"];
 	    }
 	}
+	export class PrestamoPlus {
+	    ID: string;
+	    Amount: string;
+	    Interest: string;
+	    Cuota: string;
+	    Date: string;
+	    ClientId: string;
+	    ClientName: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new PrestamoPlus(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.ID = source["ID"];
+	        this.Amount = source["Amount"];
+	        this.Interest = source["Interest"];
+	        this.Cuota = source["Cuota"];
+	        this.Date = source["Date"];
+	        this.ClientId = source["ClientId"];
+	        this.ClientName = source["ClientName"];
+	    }
+	}
 
 }
 

@@ -13,11 +13,21 @@ export type Client = {
   Job: string;
 };
 
-export type prestamo = {
+export type Prestamo = {
   ID: string;
   Amount: string;
   Interest: string;
   Cuota: string;
   Date: string;
   ClientId: string;
+};
+
+export type PrestamoPlus = {
+  ID: string;
+  Amount: string;
+  Interest: string;
+  Cuota: string;
+  Date: string;
+  ClientId: string;
+  ClientName: string;
 };

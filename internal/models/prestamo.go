@@ -11,3 +11,12 @@ type Prestamo struct {
 	ClientId string
 }
 
+type PrestamoPlus struct {
+	ID         string
+	Amount     json.Number
+	Interest   json.Number
+	Cuota      json.Number
+	Date       json.Number
+	ClientId   string
+	ClientName string
+}

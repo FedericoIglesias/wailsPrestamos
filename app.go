@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"prestamos/internal/models"
 	"sort"
@@ -11,7 +10,7 @@ import (
 
 // App struct
 type App struct {
-	ctx context.Context
+	// ctx context.Context
 }
 
 func NewApp() *App {
@@ -64,7 +63,7 @@ func (a *App) SavePrestamo(prestamo models.Prestamo) {
 	driver.Write("prestamos", prestamo.ID, prestamo)
 }
 
-func (a *App) GetAllPrestamo() []models.Prestamo {
+func (a *App) GetAllPrestamo() []models.PrestamoPlus {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
@@ -87,7 +86,27 @@ func (a *App) GetAllPrestamo() []models.Prestamo {
 		listPrestamo = append(listPrestamo, *p)
 	}
 
-	sort.Slice(listPrestamo, func(i, j int) bool { return listPrestamo[i].Date < listPrestamo[j].Date })
+	return FillDataPrestamo(listPrestamo, a.GetAllClient())
+}
 
-	return listPrestamo
+func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client) []models.PrestamoPlus {
+	var listPrestamoPlus []models.PrestamoPlus
+	for _, client := range listClient {
+		for _, prestamo := range listPrestamo {
+			if prestamo.ClientId == client.ID {
+				prestamoPlus := &models.PrestamoPlus{
+					ID:         prestamo.ID,
+					Amount:     prestamo.Amount,
+					Interest:   prestamo.Interest,
+					Cuota:      prestamo.Cuota,
+					Date:       prestamo.Date,
+					ClientId:   prestamo.ClientId,
+					ClientName: client.Name + " " + client.Last_Name,
+				}
+				listPrestamoPlus = append(listPrestamoPlus, *prestamoPlus)
+			}
+		}
+	}
+	sort.Slice(listPrestamoPlus, func(i, j int) bool { return listPrestamoPlus[i].Date < listPrestamoPlus[j].Date })
+	return listPrestamoPlus
 }

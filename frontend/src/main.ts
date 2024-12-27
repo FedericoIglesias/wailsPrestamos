@@ -4,7 +4,7 @@ import {
   SavePrestamo,
   GetAllPrestamo,
 } from "../wailsjs/go/main/App.js";
-import { Client, prestamo } from "./vite-env.js";
+import { Client, Prestamo, PrestamoPlus } from "./vite-env.js";
 const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
 const addClient = $("add-client");
@@ -35,7 +35,7 @@ const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
 const tbodyPrestamo = $("tbodyPrestamo");
 const listClient = GetAllClient().then((data) => data);
-const listPrestamo = GetAllPrestamo().then((data) => data);
+const listPrestamoPlus = GetAllPrestamo().then((data) => data || []);
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
@@ -49,13 +49,15 @@ const createRowClient = (Client: Client) => {
   <td>${Client.Job}</td>
   </tr>`;
 };
-const createRowPrestamo = (prestamo: prestamo) => {
+const createRowPrestamo = (prestamo: PrestamoPlus) => {
   return `<tr>
+  <td>${prestamo.ClientName}</td>
   <td>${prestamo.Amount}</td>
   <td>${prestamo.Interest}</td>
+  <td>${new Date(prestamo.Date)}</td>
   <td>${prestamo.Cuota}</td>
-  <td>${prestamo.Date}</td>
-  <td>${prestamo.ClientId}</td>
+  <td>${null}</td>
+  <td>${null}</td>
   </tr>`;
 };
 
@@ -64,10 +66,11 @@ const initTablePrestamo = async () => {
     while (tbodyPrestamo.firstChild) {
       tbodyPrestamo.removeChild(tbodyPrestamo.firstChild);
     }
-    (await listPrestamo).map((Prestamo: prestamo) => {
-      const row = createRowPrestamo(Prestamo);
-      tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
-    });
+    if (listPrestamoPlus)
+      (await listPrestamoPlus).map((Prestamo: PrestamoPlus) => {
+        const row = createRowPrestamo(Prestamo);
+        tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
+      });
   }
 };
 
@@ -110,7 +113,7 @@ const createClient = () => {
 };
 
 const createPrestamo = () => {
-  const prestamo: prestamo = {
+  const prestamo: Prestamo = {
     ID: "P" + new Date().getTime().toString(),
     Amount: inputAmount.value,
     Interest: inputInterest.value,
@@ -119,6 +122,7 @@ const createPrestamo = () => {
     ClientId: selectClient.value,
   };
   SavePrestamo(prestamo);
+
   inputAmount.value = "";
   inputInterest.value = "";
   inputCuota.value = "";
@@ -181,7 +185,6 @@ const checkPrestamo = () => {
     ? (selectClient.style.border = "1px solid red")
     : ((selectClient.style.border = "1px solid black"), checkCount++);
   if (checkCount >= 5) {
-    console.log(checkCount);
     return createPrestamo();
   }
   return alert("Complete todos los campos");
@@ -211,8 +214,8 @@ if (tableClient)
     sectionTablePrestamo.style.display = "none";
   });
 if (tablePrestamo)
-  tablePrestamo.addEventListener("click", () => {
-    initTablePrestamo();
+  tablePrestamo.addEventListener("click", async () => {
+    await initTablePrestamo();
     sectionAddClient.style.display = "none";
     sectionAddPrestamo.style.display = "none";
     sectionTableClient.style.display = "none";
@@ -261,12 +264,10 @@ const showCalculated = (toPay: number) => {
 };
 
 const fillSelectClient = async () => {
-  console.log("fill select");
   (await listClient).map((client: Client) => {
-    selectClient.appendChild(
-      document.createElement("option")
-    ).innerHTML = `<option value=${client.ID}>${
-      client.DNI + "--" + client.Name + " " + client.Last_Name
-    }</option>`;
+    let option: HTMLOptionElement = document.createElement("option");
+    option.value = client.ID;
+    option.text = client.DNI + "--" + client.Name + " " + client.Last_Name;
+    selectClient.add(option);
   });
 };
