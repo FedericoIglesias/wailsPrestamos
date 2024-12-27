@@ -63,3 +63,31 @@ func (a *App) SavePrestamo(prestamo models.Prestamo) {
 
 	driver.Write("prestamos", prestamo.ID, prestamo)
 }
+
+func (a *App) GetAllPrestamo() []models.Prestamo {
+	driver, err := local_db.New("./db", nil)
+
+	if err != nil {
+		panic(err)
+	}
+
+	listPrestamo := []models.Prestamo{}
+
+	records, err := driver.ReadAll("prestamos")
+
+	if err != nil {
+		panic(err)
+	}
+
+	for _, prestamo := range records {
+		p := &models.Prestamo{}
+		if err := json.Unmarshal([]byte(prestamo), &p); err != nil {
+			panic(err)
+		}
+		listPrestamo = append(listPrestamo, *p)
+	}
+
+	sort.Slice(listPrestamo, func(i, j int) bool { return listPrestamo[i].Date < listPrestamo[j].Date })
+
+	return listPrestamo
+}

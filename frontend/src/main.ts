@@ -2,6 +2,7 @@ import {
   SaveClient,
   GetAllClient,
   SavePrestamo,
+  GetAllPrestamo,
 } from "../wailsjs/go/main/App.js";
 import { Client, prestamo } from "./vite-env.js";
 const $ = (id: string) => document.getElementById(id);
@@ -34,6 +35,7 @@ const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
 const tbodyPrestamo = $("tbodyPrestamo");
 const listClient = GetAllClient().then((data) => data);
+const listPrestamo = GetAllPrestamo().then((data) => data);
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
@@ -47,20 +49,26 @@ const createRowClient = (Client: Client) => {
   <td>${Client.Job}</td>
   </tr>`;
 };
-const createRowPrestamo = (
-  Amount: any,
-  Interest: any,
-  Cuota: any,
-  Date: any,
-  Client: any
-) => {
+const createRowPrestamo = (prestamo: prestamo) => {
   return `<tr>
-  <td>${Amount}</td>
-  <td>${Interest}</td>
-  <td>${Cuota}</td>
-  <td>${Date}</td>
-  <td>${Client}</td>
+  <td>${prestamo.Amount}</td>
+  <td>${prestamo.Interest}</td>
+  <td>${prestamo.Cuota}</td>
+  <td>${prestamo.Date}</td>
+  <td>${prestamo.ClientId}</td>
   </tr>`;
+};
+
+const initTablePrestamo = async () => {
+  if (tbodyPrestamo) {
+    while (tbodyPrestamo.firstChild) {
+      tbodyPrestamo.removeChild(tbodyPrestamo.firstChild);
+    }
+    (await listPrestamo).map((Prestamo: prestamo) => {
+      const row = createRowPrestamo(Prestamo);
+      tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
+    });
+  }
 };
 
 const InitTableClient = async () => {
@@ -111,16 +119,6 @@ const createPrestamo = () => {
     ClientId: selectClient.value,
   };
   SavePrestamo(prestamo);
-
-  const row = createRowPrestamo(
-    inputAmount.value,
-    inputInterest.value,
-    inputCuota.value,
-    inputDate.value,
-    selectClient.value
-  );
-  if (tbodyPrestamo)
-    tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
   inputAmount.value = "";
   inputInterest.value = "";
   inputCuota.value = "";
@@ -214,6 +212,7 @@ if (tableClient)
   });
 if (tablePrestamo)
   tablePrestamo.addEventListener("click", () => {
+    initTablePrestamo();
     sectionAddClient.style.display = "none";
     sectionAddPrestamo.style.display = "none";
     sectionTableClient.style.display = "none";

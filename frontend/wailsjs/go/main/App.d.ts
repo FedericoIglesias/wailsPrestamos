@@ -4,6 +4,8 @@ import {models} from '../models';
 
 export function GetAllClient():Promise<Array<models.Client>>;
 
+export function GetAllPrestamo():Promise<Array<models.Prestamo>>;
+
 export function SaveClient(arg1:models.Client):Promise<void>;
 
 export function SavePrestamo(arg1:models.Prestamo):Promise<void>;
