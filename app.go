@@ -31,7 +31,7 @@ func (a *App) SaveClient(Client models.Client) {
 	if err != nil {
 		panic(err)
 	}
-	driver.Write("client", Client.ID, Client)
+	driver.Write("clients", Client.ID, Client)
 }
 
 func (a *App) GetAllClient() []models.Client {

@@ -77,43 +77,34 @@ const InitTableClient = async () => {
 };
 
 const createClient = () => {
-  if (
-    inptName &&
-    inptLastName &&
-    inptAddress &&
-    inptPhone &&
-    inptEmail &&
-    inptDNI &&
-    inptCUIL &&
-    inptEmpresa &&
-    inptJob
-  ) {
-    SaveClient(
-      inptName.value.toLowerCase(),
-      inptLastName.value.toLowerCase(),
-      inptAddress.value.toLowerCase(),
-      inptPhone.value.toString(),
-      inptEmail.value.toLowerCase(),
-      inptDNI.value.toString(),
-      inptCUIL.value.toString(),
-      inptEmpresa.value.toLowerCase(),
-      inptJob.value.toLowerCase()
-    );
-    inptName.value = "";
-    inptLastName.value = "";
-    inptAddress.value = "";
-    inptPhone.value = "";
-    inptEmail.value = "";
-    inptDNI.value = "";
-    inptCUIL.value = "";
-    inptEmpresa.value = "";
-    inptJob.value = "";
-  }
+  const client: Client = {
+    ID: "C" + new Date().getTime().toString(),
+    Name: inptName.value.toLowerCase(),
+    Last_Name: inptLastName.value.toLowerCase(),
+    Address: inptAddress.value.toLowerCase(),
+    Phone: inptPhone.value.toString(),
+    Email: inptEmail.value.toLowerCase(),
+    DNI: inptDNI.value.toString(),
+    CUIL: inptCUIL.value.toString(),
+    Empresa: inptEmpresa.value.toLowerCase(),
+    Job: inptJob.value.toLowerCase(),
+  };
+
+  SaveClient(client);
+  inptName.value = "";
+  inptLastName.value = "";
+  inptAddress.value = "";
+  inptPhone.value = "";
+  inptEmail.value = "";
+  inptDNI.value = "";
+  inptCUIL.value = "";
+  inptEmpresa.value = "";
+  inptJob.value = "";
 };
 
 const createPrestamo = () => {
   const prestamo: prestamo = {
-    ID: new Date().getTime().toString(),
+    ID: "P" + new Date().getTime().toString(),
     Amount: inputAmount.value,
     Interest: inputInterest.value,
     Cuota: inputCuota.value,
