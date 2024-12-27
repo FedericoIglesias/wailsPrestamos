@@ -52,7 +52,7 @@ export namespace models {
 	        this.ClientId = source["ClientId"];
 	    }
 	}
-	export class PrestamoPlus {
+	export class PrestamoTable {
 	    ID: string;
 	    Amount: string;
 	    Interest: string;
@@ -62,7 +62,7 @@ export namespace models {
 	    ClientName: string;
 	
 	    static createFrom(source: any = {}) {
-	        return new PrestamoPlus(source);
+	        return new PrestamoTable(source);
 	    }
 	
 	    constructor(source: any = {}) {

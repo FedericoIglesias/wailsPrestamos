@@ -63,7 +63,7 @@ func (a *App) SavePrestamo(prestamo models.Prestamo) {
 	driver.Write("prestamos", prestamo.ID, prestamo)
 }
 
-func (a *App) GetAllPrestamo() []models.PrestamoPlus {
+func (a *App) GetAllPrestamoTable() []models.PrestamoTable {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
@@ -89,12 +89,12 @@ func (a *App) GetAllPrestamo() []models.PrestamoPlus {
 	return FillDataPrestamo(listPrestamo, a.GetAllClient())
 }
 
-func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client) []models.PrestamoPlus {
-	var listPrestamoPlus []models.PrestamoPlus
+func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client) []models.PrestamoTable {
+	var listPrestamoTable []models.PrestamoTable
 	for _, client := range listClient {
 		for _, prestamo := range listPrestamo {
 			if prestamo.ClientId == client.ID {
-				prestamoPlus := &models.PrestamoPlus{
+				prestamoTable := &models.PrestamoTable{
 					ID:         prestamo.ID,
 					Amount:     prestamo.Amount,
 					Interest:   prestamo.Interest,
@@ -103,10 +103,10 @@ func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client
 					ClientId:   prestamo.ClientId,
 					ClientName: client.Name + " " + client.Last_Name,
 				}
-				listPrestamoPlus = append(listPrestamoPlus, *prestamoPlus)
+				listPrestamoTable = append(listPrestamoTable, *prestamoTable)
 			}
 		}
 	}
-	sort.Slice(listPrestamoPlus, func(i, j int) bool { return listPrestamoPlus[i].Date < listPrestamoPlus[j].Date })
-	return listPrestamoPlus
+	sort.Slice(listPrestamoTable, func(i, j int) bool { return listPrestamoTable[i].Date < listPrestamoTable[j].Date })
+	return listPrestamoTable
 }

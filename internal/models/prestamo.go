@@ -11,7 +11,7 @@ type Prestamo struct {
 	ClientId string
 }
 
-type PrestamoPlus struct {
+type PrestamoTable struct {
 	ID         string
 	Amount     json.Number
 	Interest   json.Number

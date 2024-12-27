@@ -2,7 +2,7 @@ import {
   SaveClient,
   GetAllClient,
   SavePrestamo,
-  GetAllPrestamo,
+  GetAllPrestamoTable,
 } from "../wailsjs/go/main/App.js";
 import { Client, Prestamo, PrestamoPlus } from "./vite-env.js";
 const $ = (id: string) => document.getElementById(id);
@@ -35,7 +35,7 @@ const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
 const tbodyPrestamo = $("tbodyPrestamo");
 const listClient = GetAllClient().then((data) => data);
-const listPrestamoPlus = GetAllPrestamo().then((data) => data || []);
+const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>

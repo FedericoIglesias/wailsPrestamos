@@ -6,8 +6,8 @@ export function GetAllClient() {
   return window['go']['main']['App']['GetAllClient']();
 }
 
-export function GetAllPrestamo() {
-  return window['go']['main']['App']['GetAllPrestamo']();
+export function GetAllPrestamoTable() {
+  return window['go']['main']['App']['GetAllPrestamoTable']();
 }
 
 export function SaveClient(arg1) {
