@@ -20,6 +20,7 @@ export type Prestamo = {
   Cuota: string;
   Date: string;
   ClientId: string;
+  CheckPay: CheckPay[];
 };
 
 export type PrestamoPlus = {
@@ -30,4 +31,18 @@ export type PrestamoPlus = {
   Date: string;
   ClientId: string;
   ClientName: string;
+};
+
+export type CheckPay = {
+  Month: string;
+  Pay: boolean;
+};
+
+export type PrestamoBrought = {
+  ID: string;
+  Amount: string;
+  Interest: string;
+  Cuota: string;
+  Date: string;
+  ClientId: string;
 };

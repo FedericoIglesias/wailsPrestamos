@@ -30,7 +30,7 @@ export namespace models {
 	        this.Job = source["Job"];
 	    }
 	}
-	export class Prestamo {
+	export class PrestamoBrought {
 	    ID: string;
 	    Amount: string;
 	    Interest: string;
@@ -39,7 +39,7 @@ export namespace models {
 	    ClientId: string;
 	
 	    static createFrom(source: any = {}) {
-	        return new Prestamo(source);
+	        return new PrestamoBrought(source);
 	    }
 	
 	    constructor(source: any = {}) {

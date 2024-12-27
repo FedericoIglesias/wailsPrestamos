@@ -4,7 +4,7 @@ import {
   SavePrestamo,
   GetAllPrestamoTable,
 } from "../wailsjs/go/main/App.js";
-import { Client, Prestamo, PrestamoPlus } from "./vite-env.js";
+import { Client, PrestamoBrought, PrestamoPlus } from "./vite-env.js";
 const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
 const addClient = $("add-client");
@@ -113,7 +113,7 @@ const createClient = () => {
 };
 
 const createPrestamo = () => {
-  const prestamo: Prestamo = {
+  const prestamo: PrestamoBrought = {
     ID: "P" + new Date().getTime().toString(),
     Amount: inputAmount.value,
     Interest: inputInterest.value,

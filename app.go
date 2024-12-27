@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"prestamos/internal/models"
 	"sort"
+	"time"
 
 	"github.com/FedericoIglesias/local_db"
 )
@@ -54,7 +56,7 @@ func (a *App) GetAllClient() []models.Client {
 	return listClient
 }
 
-func (a *App) SavePrestamo(prestamo models.Prestamo) {
+func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		panic(err)
@@ -107,6 +109,21 @@ func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client
 			}
 		}
 	}
+
+	FillMonth(listPrestamo[0].Date, listPrestamo[0].Cuota)
+
 	sort.Slice(listPrestamoTable, func(i, j int) bool { return listPrestamoTable[i].Date < listPrestamoTable[j].Date })
 	return listPrestamoTable
+}
+
+func FillMonth(Date json.Number, cuotas json.Number) { //[]models.CheckPay {
+	jsTime, err := Date.Int64()
+	if err != nil {
+		fmt.Errorf("%v ", err)
+	}
+
+	t := time.Unix(jsTime/1000, 0)
+
+	fmt.Println(t.Month())
+
 }

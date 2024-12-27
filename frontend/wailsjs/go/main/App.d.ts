@@ -8,4 +8,4 @@ export function GetAllPrestamoTable():Promise<Array<models.PrestamoTable>>;
 
 export function SaveClient(arg1:models.Client):Promise<void>;
 
-export function SavePrestamo(arg1:models.Prestamo):Promise<void>;
+export function SavePrestamo(arg1:models.PrestamoBrought):Promise<void>;
