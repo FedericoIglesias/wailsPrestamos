@@ -14,16 +14,9 @@ type App struct {
 	ctx context.Context
 }
 
-// NewApp creates a new App application struct
 func NewApp() *App {
 	return &App{}
 }
-
-// startup is called when the app starts. The context is saved
-// so we can call the runtime methods
-// func (a *App) startup(ctx context.Context) {
-// 	a.ctx = ctx
-// }
 
 func (a *App) SaveClient(Client models.Client) {
 	driver, err := local_db.New("./db", nil)
@@ -68,5 +61,5 @@ func (a *App) SavePrestamo(prestamo models.Prestamo) {
 		panic(err)
 	}
 
-	driver.Write("prestamos", prestamo.ID.String(), prestamo)
+	driver.Write("prestamos", prestamo.ID, prestamo)
 }
