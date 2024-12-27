@@ -33,9 +33,7 @@ const inptJob = $("inptJob") as HTMLInputElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
 const tbodyPrestamo = $("tbodyPrestamo");
-const listClient = await GetAllClient().then((data) => {
-  return data;
-});
+const listClient = GetAllClient().then((data) => data);
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
@@ -70,7 +68,7 @@ const InitTableClient = async () => {
     while (tbodyClient.firstChild) {
       tbodyClient.removeChild(tbodyClient.firstChild);
     }
-    listClient.map((client: Client) => {
+    (await listClient).map((client: Client) => {
       const row = createRowClient(client);
       tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
     });
@@ -200,6 +198,7 @@ if (addClient)
   });
 if (addPrestamo)
   addPrestamo.addEventListener("click", () => {
+    fillSelectClient();
     sectionAddClient.style.display = "none";
     sectionAddPrestamo.style.display = "block";
     sectionTableClient.style.display = "none";
@@ -260,4 +259,15 @@ const showCalculated = (toPay: number) => {
     <p>* Monto de interes: <span>${intForMonth}</span>$</p>
 </div>`);
   return;
+};
+
+const fillSelectClient = async () => {
+  console.log("fill select");
+  (await listClient).map((client: Client) => {
+    selectClient.appendChild(
+      document.createElement("option")
+    ).innerHTML = `<option value=${client.ID}>${
+      client.DNI + "--" + client.Name + " " + client.Last_Name
+    }</option>`;
+  });
 };
