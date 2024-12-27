@@ -33,6 +33,9 @@ const inptJob = $("inptJob") as HTMLInputElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
 const tbodyPrestamo = $("tbodyPrestamo");
+const listClient = await GetAllClient().then((data) => {
+  return data;
+});
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
@@ -67,11 +70,9 @@ const InitTableClient = async () => {
     while (tbodyClient.firstChild) {
       tbodyClient.removeChild(tbodyClient.firstChild);
     }
-    GetAllClient().then((data) => {
-      data.map((client: Client) => {
-        const row = createRowClient(client);
-        tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
-      });
+    listClient.map((client: Client) => {
+      const row = createRowClient(client);
+      tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
     });
   }
 };
