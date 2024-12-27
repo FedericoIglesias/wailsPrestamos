@@ -26,6 +26,7 @@ const inptDNI = $("inptDNI") as HTMLInputElement;
 const inptCUIL = $("inptCUIL") as HTMLInputElement;
 const inptEmpresa = $("inptEmpresa") as HTMLInputElement;
 const inptJob = $("inptJob") as HTMLInputElement;
+const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
 const tbodyPrestamo = $("tbodyPrestamo");
 
@@ -232,3 +233,25 @@ sectionAddPrestamo.addEventListener("keypress", (e) => {
     checkPrestamo();
   }
 });
+
+sectionAddPrestamo.addEventListener("change", () => {
+  const { toPay } = calculatePrestamo();
+  showCalculated(toPay);
+});
+
+const calculatePrestamo = () => {
+  const int = Number(inputInterest.value) * Number(inputCuota.value);
+  const toPay = Math.floor(Number(inputAmount.value) * (1 + int / 100));
+  return { int, toPay };
+};
+const showCalculated = (toPay: number) => {
+  const amountForMonth = Math.floor(toPay / Number(inputCuota.value));
+  const intForMonth = Math.floor(toPay - Number(inputAmount.value));
+  if (descriptionPrestamo)
+    return (descriptionPrestamo.innerHTML = `<div>
+    <p>* Monto a devolver: <span>${toPay}</span>$</p>
+    <p>* Monto por mes: <span>${amountForMonth}</span>$</p>
+    <p>* Monto de interes: <span>${intForMonth}</span>$</p>
+</div>`);
+  return;
+};
