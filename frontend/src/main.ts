@@ -2,9 +2,9 @@ import {
   SaveClient,
   GetAllClient,
   SavePrestamo,
-  GetAllPrestamoTable,
 } from "../wailsjs/go/main/App.js";
-import { Client, PrestamoBrought, PrestamoPlus } from "./vite-env.js";
+import { initTablePrestamo } from "./utils/tablePrestamos.js";
+import { Client, PrestamoBrought } from "./vite-env.js";
 const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
 const addClient = $("add-client");
@@ -33,9 +33,16 @@ const inptEmpresa = $("inptEmpresa") as HTMLInputElement;
 const inptJob = $("inptJob") as HTMLInputElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 const tbodyClient = $("tbodyClient");
-const tbodyPrestamo = $("tbodyPrestamo");
 const listClient = GetAllClient().then((data) => data);
-const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
+
+if (tablePrestamo)
+  tablePrestamo.addEventListener("click", async () => {
+    await initTablePrestamo();
+    sectionAddClient.style.display = "none";
+    sectionAddPrestamo.style.display = "none";
+    sectionTableClient.style.display = "none";
+    sectionTablePrestamo.style.display = "block";
+  });
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
@@ -48,31 +55,6 @@ const createRowClient = (Client: Client) => {
   <td>${Client.Empresa}</td>
   <td>${Client.Job}</td>
   </tr>`;
-};
-const createRowPrestamo = (prestamo: PrestamoPlus) => {
-  const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
-  return `<tr>
-  <td>${prestamo.ClientName}</td>
-  <td>${prestamo.Amount}</td>
-  <td>${prestamo.Interest}</td>
-  <td>${date}</td>
-  <td>${prestamo.Cuota}</td>
-  <td>${null}</td>
-  <td>${null}</td>
-  </tr>`;
-};
-
-const initTablePrestamo = async () => {
-  if (tbodyPrestamo) {
-    while (tbodyPrestamo.firstChild) {
-      tbodyPrestamo.removeChild(tbodyPrestamo.firstChild);
-    }
-    if (listPrestamoPlus)
-      (await listPrestamoPlus).map((Prestamo: PrestamoPlus) => {
-        const row = createRowPrestamo(Prestamo);
-        tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
-      });
-  }
 };
 
 const InitTableClient = async () => {
@@ -213,14 +195,6 @@ if (tableClient)
     sectionAddPrestamo.style.display = "none";
     sectionTableClient.style.display = "block";
     sectionTablePrestamo.style.display = "none";
-  });
-if (tablePrestamo)
-  tablePrestamo.addEventListener("click", async () => {
-    await initTablePrestamo();
-    sectionAddClient.style.display = "none";
-    sectionAddPrestamo.style.display = "none";
-    sectionTableClient.style.display = "none";
-    sectionTablePrestamo.style.display = "block";
   });
 
 btnPrestamo.addEventListener("click", () => {
