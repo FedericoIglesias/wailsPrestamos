@@ -50,11 +50,12 @@ const createRowClient = (Client: Client) => {
   </tr>`;
 };
 const createRowPrestamo = (prestamo: PrestamoPlus) => {
+  const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
   return `<tr>
   <td>${prestamo.ClientName}</td>
   <td>${prestamo.Amount}</td>
   <td>${prestamo.Interest}</td>
-  <td>${new Date(prestamo.Date)}</td>
+  <td>${date}</td>
   <td>${prestamo.Cuota}</td>
   <td>${null}</td>
   <td>${null}</td>
@@ -121,7 +122,6 @@ const createPrestamo = () => {
     Date: new Date(inputDate.value).getTime().toString(),
     ClientId: selectClient.value,
   };
-  console.log("save PRestamo")
   SavePrestamo(prestamo);
 
   inputAmount.value = "";
