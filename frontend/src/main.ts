@@ -3,7 +3,8 @@ import {
   GetAllClient,
   SavePrestamo,
 } from "../wailsjs/go/main/App.js";
-import { initTablePrestamo } from "./utils/tablePrestamos.js";
+import { InitTableClient } from "./utils/tableClient.js";
+import { initTablePrestamo } from "./utils/tablePrestamo.js";
 import { Client, PrestamoBrought } from "./vite-env.js";
 const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
@@ -32,7 +33,6 @@ const inptCUIL = $("inptCUIL") as HTMLInputElement;
 const inptEmpresa = $("inptEmpresa") as HTMLInputElement;
 const inptJob = $("inptJob") as HTMLInputElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
-const tbodyClient = $("tbodyClient");
 const listClient = GetAllClient().then((data) => data);
 
 if (tablePrestamo)
@@ -44,30 +44,8 @@ if (tablePrestamo)
     sectionTablePrestamo.style.display = "block";
   });
 
-const createRowClient = (Client: Client) => {
-  return `<tr id=${Client.ID}>
-  <td>${Client.Name + " " + Client.Last_Name}</td>
-  <td>${Client.Address}</td>
-  <td>${Client.Phone}</td>
-  <td>${Client.Email}</td>
-  <td>${Client.DNI}</td>
-  <td>${Client.CUIL}</td>
-  <td>${Client.Empresa}</td>
-  <td>${Client.Job}</td>
-  </tr>`;
-};
 
-const InitTableClient = async () => {
-  if (tbodyClient) {
-    while (tbodyClient.firstChild) {
-      tbodyClient.removeChild(tbodyClient.firstChild);
-    }
-    (await listClient).map((client: Client) => {
-      const row = createRowClient(client);
-      tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
-    });
-  }
-};
+
 
 const createClient = () => {
   const client: Client = {

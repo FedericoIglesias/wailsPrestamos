@@ -1,5 +1,5 @@
 import { GetAllPrestamoTable } from "../../wailsjs/go/main/App.js";
-import { PrestamoPlus } from "..//vite-env.js";
+import { PrestamoPlus } from "../vite-env.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyPrestamo = $("tbodyPrestamo");
 const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
