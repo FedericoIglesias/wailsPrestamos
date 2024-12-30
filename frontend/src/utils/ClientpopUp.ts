@@ -34,21 +34,22 @@ export const popUpClientInfo = (client: ClientPopUp) => {
               <th>Intereses</th>
               <th>Fecha</th>
               <th>Cuotas</th>
-              <th>Resta</th>
-              <th>Estado</th>
             </tr>
           </thead>
           <tbody id="tbodyPrestamo">
-          ${client.Prestamos?.map((prestamo) => {
-            return `<tr>
+          ${
+            client.Prestamos?.map((prestamo) => {
+              return `<tr>
               <td>${prestamo.Amount}</td>
               <td>${prestamo.Interest}</td>
               <td>${new Date(prestamo.Date).toLocaleDateString("es-ES")}</td>
               <td>${prestamo.Cuota}</td>
-              <td>${null}</td>
-              <td>${null}</td>
+              <td><button class="infoPrestamo" id="${
+                prestamo.ID
+              }">&#128269</button></td>
             </tr>`;
-          })}
+            }) || ""
+          }
           </tbody>
         </table>
       </div>
