@@ -39,7 +39,7 @@ export const InitTableClient = async () => {
         section.className = "popUpClient";
         section.innerHTML = popUpClientInfo();
         body[0].appendChild(section);
-        await GetClientPopUp(row.id);
+        console.log(await GetClientPopUp(row.id));
         $("close")?.addEventListener("click", () => {
           body[0].removeChild(section);
         });

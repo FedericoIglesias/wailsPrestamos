@@ -155,12 +155,33 @@ func FillMonth(Date json.Number, cuotas json.Number) []models.CheckPay {
 
 func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 	driver, err := local_db.New("./db", nil)
-
 	if err != nil {
 		panic(err)
 	}
 	client := &models.ClientPopUp{}
 	driver.Read("clients", ID, client)
+
+	recordsPrestamos, err := driver.ReadAll("prestamos")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, r := range recordsPrestamos {
+		p := &models.Prestamo{}
+		err := json.Unmarshal([]byte(r), p)
+		if err != nil {
+			panic(err)
+		}
+		if ID == p.ClientId {
+			client.Prestamos = append(client.Prestamos, models.PrestamoToPopUpClient{
+				ID:       p.ID,
+				Amount:   p.Amount,
+				Interest: p.Interest,
+				Cuota:    p.Cuota,
+				Date:     p.Date,
+			})
+		}
+	}
 
 	return client
 }
