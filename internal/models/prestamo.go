@@ -30,3 +30,11 @@ type PrestamoBrought struct {
 	Date     json.Number
 	ClientId string
 }
+
+type PrestamoToPopUpClient struct {
+	ID       string
+	Amount   json.Number
+	Interest json.Number
+	Cuota    json.Number
+	Date     json.Number
+}

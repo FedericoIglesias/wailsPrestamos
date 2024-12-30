@@ -1,4 +1,4 @@
-import { GetAllClient } from "../../wailsjs/go/main/App.js";
+import { GetAllClient, GetClientPopUp } from "../../wailsjs/go/main/App.js";
 import { Client } from "../vite-env.js";
 import { popUpClientInfo } from "./popUp.js";
 const $ = (id: string) => document.getElementById(id);
@@ -34,11 +34,12 @@ export const InitTableClient = async () => {
 
   if (rows.length)
     for (const row of rows) {
-      row.addEventListener("click", () => {
+      row.addEventListener("click", async () => {
         const section = document.createElement("body");
         section.className = "popUpClient";
         section.innerHTML = popUpClientInfo();
         body[0].appendChild(section);
+        await GetClientPopUp(row.id);
         $("close")?.addEventListener("click", () => {
           body[0].removeChild(section);
         });

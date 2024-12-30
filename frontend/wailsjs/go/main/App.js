@@ -10,6 +10,10 @@ export function GetAllPrestamoTable() {
   return window['go']['main']['App']['GetAllPrestamoTable']();
 }
 
+export function GetClientPopUp(arg1) {
+  return window['go']['main']['App']['GetClientPopUp'](arg1);
+}
+
 export function SaveClient(arg1) {
   return window['go']['main']['App']['SaveClient'](arg1);
 }

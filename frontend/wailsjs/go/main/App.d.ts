@@ -6,6 +6,8 @@ export function GetAllClient():Promise<Array<models.Client>>;
 
 export function GetAllPrestamoTable():Promise<Array<models.PrestamoTable>>;
 
+export function GetClientPopUp(arg1:string):Promise<models.ClientPopUp>;
+
 export function SaveClient(arg1:models.Client):Promise<void>;
 
 export function SavePrestamo(arg1:models.PrestamoBrought):Promise<void>;

@@ -46,3 +46,27 @@ export type PrestamoBrought = {
   Date: string;
   ClientId: string;
 };
+
+export type PrestamoToPopUpClient = {
+  ID: string;
+  Amount: string;
+  Interest: string;
+  Cuota: string;
+  Date: string;
+};
+
+export type ClientPopUp = {
+  Name: string;
+  Last_Name: string;
+  Address: string;
+  Phone: string;
+  Email: string;
+  DNI: string;
+  CUIL: string;
+  Empresa: string;
+  Job: string;
+  PrestamoAmount: string;
+  AmountDue: string;
+  AmountPaid: string;
+  Prestamos: PrestamoToPopUpClient[];
+};
