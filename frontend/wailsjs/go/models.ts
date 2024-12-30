@@ -110,6 +110,8 @@ export namespace models {
 	    Interest: string;
 	    Cuota: string;
 	    Date: string;
+	    TotalAmount: string;
+	    AmountForQuota: string;
 	    ClientId: string;
 	
 	    static createFrom(source: any = {}) {
@@ -123,6 +125,8 @@ export namespace models {
 	        this.Interest = source["Interest"];
 	        this.Cuota = source["Cuota"];
 	        this.Date = source["Date"];
+	        this.TotalAmount = source["TotalAmount"];
+	        this.AmountForQuota = source["AmountForQuota"];
 	        this.ClientId = source["ClientId"];
 	    }
 	}

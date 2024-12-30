@@ -64,16 +64,17 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 
 	listCheckPay := FillMonth(prestamo.Date, prestamo.Cuota)
 
-	fmt.Printf("%v ", listCheckPay)
-
 	driver.Write("prestamos", prestamo.ID, &models.Prestamo{
-		ID:       prestamo.ID,
-		Amount:   prestamo.Amount,
-		Interest: prestamo.Interest,
-		Cuota:    prestamo.Cuota,
-		Date:     prestamo.Date,
-		ClientId: prestamo.ClientId,
-		CheckPay: listCheckPay,
+		ID:             prestamo.ID,
+		Amount:         prestamo.Amount,
+		Interest:       prestamo.Interest,
+		Cuota:          prestamo.Cuota,
+		Date:           prestamo.Date,
+		ClientId:       prestamo.ClientId,
+		CheckPay:       listCheckPay,
+		TotalAmount:    json.Number(12),
+		AmountPaid:     json.Number(0),
+		AmountForQuota: json.Number(2),
 	})
 }
 

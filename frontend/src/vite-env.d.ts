@@ -44,6 +44,8 @@ export type PrestamoBrought = {
   Interest: string;
   Cuota: string;
   Date: string;
+  TotalAmount: string;
+  AmountForQuota: string;
   ClientId: string;
 };
 
