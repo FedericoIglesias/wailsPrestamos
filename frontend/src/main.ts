@@ -20,7 +20,6 @@ const sectionTablePrestamo = $$(".table-prestamo") as HTMLDivElement;
 const btnPrestamo = $("btnPrestamo") as HTMLButtonElement;
 const btnClient = $("btnClient") as HTMLButtonElement;
 
-
 tablePrestamo?.addEventListener("click", async () => {
   await initTablePrestamo();
   sectionAddClient.style.display = "none";
@@ -49,7 +48,6 @@ tableClient?.addEventListener("click", () => {
   sectionAddPrestamo.style.display = "none";
   sectionTableClient.style.display = "block";
   sectionTablePrestamo.style.display = "none";
-
 });
 
 btnPrestamo.addEventListener("click", () => {

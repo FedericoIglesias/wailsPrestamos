@@ -1,7 +1,9 @@
 import { GetAllPrestamoTable } from "../../wailsjs/go/main/App.js";
 import { PrestamoPlus } from "../vite-env.js";
+import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyPrestamo = $("tbodyPrestamo");
+const body = document.getElementsByTagName("body");
 const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
 
 const createRowPrestamo = (prestamo: PrestamoPlus) => {
@@ -13,7 +15,9 @@ const createRowPrestamo = (prestamo: PrestamoPlus) => {
   <td>${date}</td>
   <td>${prestamo.Cuota}</td>
   <td>${null}</td>
-  <td>${null}</td>
+  <td><td><button class="infoPrestamo" id="${
+    prestamo.ID
+  }">&#128269</button></td></td>
   </tr>`;
 };
 
@@ -27,5 +31,19 @@ export const initTablePrestamo = async () => {
         const row = createRowPrestamo(Prestamo);
         tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
       });
+    const rows = Array.from(document.querySelectorAll(".infoPrestamo"));
+
+    if (rows.length)
+      for (const row of rows) {
+        row.addEventListener("click", async () => {
+          const section = document.createElement("body");
+          section.className = "popUpPrestamo";
+          section.innerHTML = PopUpPrestamoInfo();
+          body[0].appendChild(section);
+          $("close")?.addEventListener("click", () => {
+            body[0].removeChild(section);
+          });
+        });
+      }
   }
 };
