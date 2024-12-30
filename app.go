@@ -144,7 +144,13 @@ func FillMonth(Date json.Number, cuotas json.Number) []models.CheckPay {
 
 	month := int64(t.Month())
 
-	for range cuotas {
+	c, err := cuotas.Int64()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for range c {
 		if month+1 == 13 {
 			month = 0
 		}
