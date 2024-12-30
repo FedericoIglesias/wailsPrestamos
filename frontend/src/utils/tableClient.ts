@@ -16,7 +16,7 @@ const createRowClient = (Client: Client) => {
   <td>${Client.CUIL}</td>
   <td>${Client.Empresa}</td>
   <td>${Client.Job}</td>
-  <td><button id="infoClient" data-id="${Client.ID}">&#128269</button></td>
+  <td><button class="infoClient" id="${Client.ID}">&#128269</button></td>
   </tr>`;
 };
 
@@ -30,12 +30,11 @@ export const InitTableClient = async () => {
       tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
     });
   }
-  const rows = Array.from(document.querySelectorAll("#infoClient"));
+  const rows = Array.from(document.querySelectorAll(".infoClient"));
 
   if (rows.length)
     for (const row of rows) {
       row.addEventListener("click", () => {
-        console.log("hi");
         const section = document.createElement("body");
         section.className = "popUpClient";
         section.innerHTML = popUpClientInfo();
