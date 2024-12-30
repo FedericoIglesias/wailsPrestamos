@@ -64,7 +64,7 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 
 	listCheckPay := FillMonth(prestamo.Date, prestamo.Cuota)
 
-	driver.Write("prestamos", prestamo.ID, &models.Prestamo{
+	err = driver.Write("prestamos", prestamo.ID, &models.Prestamo{
 		ID:             prestamo.ID,
 		Amount:         prestamo.Amount,
 		Interest:       prestamo.Interest,
@@ -72,10 +72,15 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 		Date:           prestamo.Date,
 		ClientId:       prestamo.ClientId,
 		CheckPay:       listCheckPay,
-		TotalAmount:    json.Number(12),
-		AmountPaid:     json.Number(0),
-		AmountForQuota: json.Number(2),
+		TotalAmount:    prestamo.TotalAmount,
+		AmountPaid:     "0",
+		AmountForQuota: prestamo.AmountForQuota,
 	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
 }
 
 func (a *App) GetAllPrestamoTable() []models.PrestamoTable {

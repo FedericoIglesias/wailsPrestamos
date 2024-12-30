@@ -19,7 +19,9 @@ const createPrestamo = () => {
     Cuota: inputCuota.value,
     Date: new Date(inputDate.value).getTime().toString(),
     ClientId: selectClient.value,
-    AmountForQuota: (totalAmount / Number(inputCuota.value)).toString(),
+    AmountForQuota: Math.floor(
+      totalAmount / Number(inputCuota.value)
+    ).toString(),
     TotalAmount: totalAmount.toString(),
   };
   SavePrestamo(prestamo);
@@ -49,9 +51,11 @@ export const checkPrestamo = () => {
     ? (selectClient.style.border = "1px solid red")
     : ((selectClient.style.border = "1px solid black"), checkCount++);
   if (checkCount >= 5) {
-    Number(inputCuota.value) >= 1
-      ? createPrestamo()
-      : alert("Cuotas debe ser mayor a 0");
+    if (Number(inputCuota.value) >= 1) {
+      return createPrestamo();
+    } else {
+      return alert("Cuotas debe ser mayor a 0");
+    }
   }
   return alert("Complete todos los campos correctamente");
 };
