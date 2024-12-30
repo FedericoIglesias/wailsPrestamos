@@ -214,7 +214,20 @@ section {
         margin: 0;
         font-size: 1.2rem;
         font-weight: bold;
+        background-color: #0056b3;
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        cursor: pointer;
     }
+
+    header p:hover {
+        background-color: #003f8a;
+        transform: scale(1.05);
+    }
+
 
     section section {
         display: flex;
@@ -256,6 +269,10 @@ section {
         font-size: 0.9rem;
     }
 
+    tr:hover {
+        background-color: #e6f7ff;
+    }
+
     table th {
         background-color: #007BFF;
         color: white;
@@ -265,4 +282,9 @@ section {
     table tbody tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+}
+
+#infoClient {
+    border: none;
+    background: none;
 }

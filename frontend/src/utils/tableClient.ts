@@ -1,8 +1,10 @@
 import { GetAllClient } from "../../wailsjs/go/main/App.js";
 import { Client } from "../vite-env.js";
+import { popUpClientInfo } from "./popUp.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyClient = $("tbodyClient");
 const listClient = GetAllClient().then((data) => data);
+const body = document.getElementsByTagName("body");
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
@@ -14,6 +16,7 @@ const createRowClient = (Client: Client) => {
   <td>${Client.CUIL}</td>
   <td>${Client.Empresa}</td>
   <td>${Client.Job}</td>
+  <td><button id="infoClient" data-id="${Client.ID}">&#128269</button></td>
   </tr>`;
 };
 
@@ -27,4 +30,19 @@ export const InitTableClient = async () => {
       tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
     });
   }
+  const rows = Array.from(document.querySelectorAll("#infoClient"));
+
+  if (rows.length)
+    for (const row of rows) {
+      row.addEventListener("click", () => {
+        console.log("hi");
+        const section = document.createElement("body");
+        section.className = "popUpClient";
+        section.innerHTML = popUpClientInfo();
+        body[0].appendChild(section);
+        $("close")?.addEventListener("click", () => {
+          body[0].removeChild(section);
+        });
+      });
+    }
 };

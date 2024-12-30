@@ -5,7 +5,6 @@ import {
   fillSelectClient,
   showCalculated,
 } from "./utils/createPrestamo.js";
-import { popUpClientInfo } from "./utils/popUp.js";
 import { InitTableClient } from "./utils/tableClient.js";
 import { initTablePrestamo } from "./utils/tablePrestamo.js";
 const $ = (id: string) => document.getElementById(id);
@@ -20,8 +19,7 @@ const sectionTableClient = $$(".table-client") as HTMLDivElement;
 const sectionTablePrestamo = $$(".table-prestamo") as HTMLDivElement;
 const btnPrestamo = $("btnPrestamo") as HTMLButtonElement;
 const btnClient = $("btnClient") as HTMLButtonElement;
-const popUpClient = $("popUpClient");
-const body = document.getElementsByTagName("body");
+
 
 tablePrestamo?.addEventListener("click", async () => {
   await initTablePrestamo();
@@ -51,6 +49,7 @@ tableClient?.addEventListener("click", () => {
   sectionAddPrestamo.style.display = "none";
   sectionTableClient.style.display = "block";
   sectionTablePrestamo.style.display = "none";
+
 });
 
 btnPrestamo.addEventListener("click", () => {
@@ -76,15 +75,4 @@ sectionAddClient.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     checkClient();
   }
-});
-
-popUpClient?.addEventListener("click", () => {
-  const section = document.createElement("body");
-  section.className = "popUpClient";
-  section.innerHTML = popUpClientInfo();
-  body[0].appendChild(section);
-  $("close")?.addEventListener("click", () => {
-    console.log("hi");
-    body[0].removeChild(section);
-  });
 });
