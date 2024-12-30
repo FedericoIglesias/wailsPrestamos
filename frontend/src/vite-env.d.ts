@@ -55,6 +55,9 @@ export type PrestamoToPopUpClient = {
   Interest: string;
   Cuota: string;
   Date: string;
+  TotalAmount: string;
+  AmountForQuota: string;
+  AmountPaid: string;
 };
 
 export type ClientPopUp = {

@@ -1,4 +1,8 @@
-export const popUpClientInfo = () => {
+import { ClientPopUp, PrestamoToPopUpClient } from "../vite-env";
+
+export const popUpClientInfo = (client: ClientPopUp) => {
+  const { AmountPaid, AmountToPay } = calculateAmount(client.Prestamos);
+
   return `<body class="popUpClient">
   <section>
     <header>
@@ -7,20 +11,20 @@ export const popUpClientInfo = () => {
     <section>
       <div>
         <p>Información Personal:</p>
-        <p>Nombre: : ${"data"}</p>
-        <p>Apellido: : ${"data"}</p>
-        <p>DNI: : ${"data"}</p>
-        <p>CUIL: ${"data"}</p>
-        <p>Teléfono: ${"data"}</p>
-        <p>Dirección: ${"data"}</p>
-        <p>Empresa: ${"data"}</p>
-        <p>Puesto: ${"data"}</p>
+        <p>Nombre: ${client.Name}</p>
+        <p>Apellido: ${client.Last_Name}</p>
+        <p>DNI: ${client.DNI}</p>
+        <p>CUIL: ${client.CUIL}</p>
+        <p>Teléfono: ${client.Phone}</p>
+        <p>Dirección: ${client.Address}</p>
+        <p>Empresa: ${client.Empresa}</p>
+        <p>Puesto: ${client.Job}</p>
       </div>
       <div>
         <p>Información Prestamos:</p>
-        <p>Cantidad de Prestamos: : ${"data"}</p>
-        <p>Cantidad de Monto a pagar: : ${"data"}</p>
-        <p>Cantidad de Monto pagado: : ${"data"}</p>
+        <p>Cantidad de Prestamos: ${client.PrestamoAmount}</p>
+        <p>Cantidad de Monto a pagar: ${AmountToPay}</p>
+        <p>Cantidad de Monto pagado: ${AmountPaid}</p>
       </div>
       <div>
         <table>
@@ -35,10 +39,31 @@ export const popUpClientInfo = () => {
             </tr>
           </thead>
           <tbody id="tbodyPrestamo">
+          ${client.Prestamos?.map((prestamo) => {
+            return `<tr>
+              <td>${prestamo.Amount}</td>
+              <td>${prestamo.Interest}</td>
+              <td>${new Date(prestamo.Date).toLocaleDateString("es-ES")}</td>
+              <td>${prestamo.Cuota}</td>
+              <td>${null}</td>
+              <td>${null}</td>
+            </tr>`;
+          })}
           </tbody>
         </table>
       </div>
     </section>
   </section>
 </body>`;
+};
+
+const calculateAmount = (listPrestamo: PrestamoToPopUpClient[]) => {
+  let AmountToPay = 0;
+  let AmountPaid = 0;
+
+  listPrestamo?.map((prestamo) => {
+    AmountToPay += Number(prestamo.TotalAmount) - Number(prestamo.AmountPaid);
+    AmountPaid += Number(prestamo.AmountPaid);
+  });
+  return { AmountPaid, AmountToPay };
 };

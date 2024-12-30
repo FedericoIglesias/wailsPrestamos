@@ -36,6 +36,9 @@ export namespace models {
 	    Interest: string;
 	    Cuota: string;
 	    Date: string;
+	    TotalAmount: string;
+	    AmountForQuota: string;
+	    AmountPaid: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new PrestamoToPopUpClient(source);
@@ -48,6 +51,9 @@ export namespace models {
 	        this.Interest = source["Interest"];
 	        this.Cuota = source["Cuota"];
 	        this.Date = source["Date"];
+	        this.TotalAmount = source["TotalAmount"];
+	        this.AmountForQuota = source["AmountForQuota"];
+	        this.AmountPaid = source["AmountPaid"];
 	    }
 	}
 	export class ClientPopUp {

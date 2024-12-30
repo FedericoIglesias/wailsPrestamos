@@ -186,11 +186,14 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 		}
 		if ID == p.ClientId {
 			client.Prestamos = append(client.Prestamos, models.PrestamoToPopUpClient{
-				ID:       p.ID,
-				Amount:   p.Amount,
-				Interest: p.Interest,
-				Cuota:    p.Cuota,
-				Date:     p.Date,
+				ID:             p.ID,
+				Amount:         p.Amount,
+				Interest:       p.Interest,
+				Cuota:          p.Cuota,
+				Date:           p.Date,
+				TotalAmount:    p.TotalAmount,
+				AmountForQuota: p.AmountForQuota,
+				AmountPaid:     p.AmountPaid,
 			})
 		}
 	}

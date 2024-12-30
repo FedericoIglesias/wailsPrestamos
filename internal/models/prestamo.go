@@ -37,9 +37,12 @@ type PrestamoBrought struct {
 }
 
 type PrestamoToPopUpClient struct {
-	ID       string
-	Amount   json.Number
-	Interest json.Number
-	Cuota    json.Number
-	Date     json.Number
+	ID             string
+	Amount         json.Number
+	Interest       json.Number
+	Cuota          json.Number
+	Date           json.Number
+	TotalAmount    json.Number
+	AmountForQuota json.Number
+	AmountPaid     json.Number
 }

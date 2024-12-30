@@ -35,11 +35,11 @@ export const InitTableClient = async () => {
   if (rows.length)
     for (const row of rows) {
       row.addEventListener("click", async () => {
+        const clientInfo = await GetClientPopUp(row.id);
         const section = document.createElement("body");
         section.className = "popUpClient";
-        section.innerHTML = popUpClientInfo();
+        section.innerHTML = popUpClientInfo(clientInfo);
         body[0].appendChild(section);
-        console.log(await GetClientPopUp(row.id));
         $("close")?.addEventListener("click", () => {
           body[0].removeChild(section);
         });
