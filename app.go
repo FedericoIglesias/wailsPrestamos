@@ -174,18 +174,23 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 	if err != nil {
 		panic(err)
 	}
+
 	client := &models.ClientPopUp{}
+
+	if err = driver.Read("clients", ID, client); err != nil {
+		panic(err)
+	}
 
 	recordsPrestamos, err := driver.ReadAll("prestamos")
 	if err != nil {
-		return nil
+		panic(err)
 	}
 
 	for _, r := range recordsPrestamos {
 		p := &models.Prestamo{}
 		err := json.Unmarshal([]byte(r), p)
 		if err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 		if ID == p.ClientId {
 			client.Prestamos = append(client.Prestamos, models.PrestamoToPopUpClient{
