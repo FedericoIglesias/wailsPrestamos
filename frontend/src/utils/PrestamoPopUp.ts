@@ -34,22 +34,26 @@ export const PopUpPrestamoInfo = (
           </tr>
         </thead>
         <tbody id="tbodyPrestamo">
-        ${
-          CheckPay?.map((object: models.CheckPay, index) => {
-            return `<tr>
-            <td>${index + 1}°</td>
-            <td>${object.Month}</td>
-            <td style="text-aling:center"><input type="checkbox" ${
-              object.Pay ? `checked="checked"` : null
-            }></td>
-          </tr>`;
-          }) || ""
-        }
+        ${insertCheckPay(CheckPay)}
         </tbody>
       </table>
       </div>
+      <button class="savePrestamo">Guardar</button>
     </section>
   </section>
 </body>
   `;
+};
+
+const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
+  if (!listCheckPay) return "";
+  return listCheckPay?.map((object: models.CheckPay, index) => {
+    return `<tr>
+    <td>${index + 1}°</td>
+    <td>${object.Month}</td>
+    <td style="text-aling:center"><input type="checkbox" ${
+      object.Pay ? `checked="checked"` : null
+    } id="checked${index}" ></td>
+  </tr>`;
+  });
 };

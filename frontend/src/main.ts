@@ -7,7 +7,7 @@ import {
 } from "./utils/createPrestamo.js";
 import { InitTableClient } from "./utils/tableClient.js";
 import { initTablePrestamo } from "./utils/tablePrestamo.js";
-const $ = (id: string) => document.getElementById(id);
+export const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
 const addClient = $("add-client");
 const addPrestamo = $("add-prestamo");
