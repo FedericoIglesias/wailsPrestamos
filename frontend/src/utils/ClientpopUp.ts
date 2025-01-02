@@ -46,7 +46,7 @@ export const popUpClientInfo = (client: ClientPopUp) => {
               <td>${new Date(prestamo.Date).toLocaleDateString("es-ES")}</td>
               <td>${prestamo.Cuota}</td>
               <td><button class="infoPrestamo" id="${
-                prestamo.ID
+                prestamo.ID + "." + client.Name + " " + client.Last_Name
               }">&#128269</button></td>
             </tr>`;
             }) || ""

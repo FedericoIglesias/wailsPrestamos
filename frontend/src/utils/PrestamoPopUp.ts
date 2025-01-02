@@ -1,11 +1,14 @@
 import { models } from "../../wailsjs/go/models";
 
-export const PopUpPrestamoInfo = async (prestamo: models.Prestamo) => {
+export const PopUpPrestamoInfo = (
+  prestamo: models.Prestamo,
+  client: string
+) => {
   const CheckPay = prestamo.CheckPay || [];
   return `<body class="popUp">
   <section>
   <header>
-    <p>Client: ${prestamo.ClientId}</p>
+    <p>${client}</p>
     <p id="closeP">&#10060</p>
   </header>
     <section>
@@ -28,15 +31,17 @@ export const PopUpPrestamoInfo = async (prestamo: models.Prestamo) => {
           </tr>
         </thead>
         <tbody id="tbodyPrestamo">
-        ${await CheckPay?.map((object: models.CheckPay, index) => {
-          return `<tr>
+        ${
+          (CheckPay?.map((object: models.CheckPay, index) => {
+            return `<tr>
             <td>${index + 1}°</td>
             <td>${object.Month}</td>
             <td style="text-aling:center"><input type="checkbox" ${
               object.Pay ? `checked="checked"` : null
             }></td>
           </tr>`;
-        })}
+          })) || ""
+        }
         </tbody>
       </table>
       </div>
