@@ -31,22 +31,24 @@ export const initTablePrestamo = async () => {
         const row = createRowPrestamo(Prestamo);
         tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
       });
-    const rows = Array.from(document.querySelectorAll(".infoPrestamo"));
-
-    if (rows.length)
-      for (const row of rows) {
-        row.addEventListener("click", async () => {
-          const prestamo = await GetPrestamo(row.id)
-          const section = document.createElement("body");
-          section.className = "popUpClient";
-          section.innerHTML = await PopUpPrestamoInfo(prestamo);
-          body[0].appendChild(section);
-          $("close")?.addEventListener("click", () => {
-            body[0].removeChild(section);
-          });
-        });
-      }
+    detailsPrestamos();
   }
 };
 
+export const detailsPrestamos = () => {
+  const rows = Array.from(document.querySelectorAll(".infoPrestamo"));
 
+  if (rows.length)
+    for (const row of rows) {
+      row.addEventListener("click", async () => {
+        const prestamo = await GetPrestamo(row.id);
+        const section = document.createElement("body");
+        section.className = "popUpClient";
+        section.innerHTML = await PopUpPrestamoInfo(prestamo);
+        body[0].appendChild(section);
+        $("closeP")?.addEventListener("click", () => {
+          body[0].removeChild(section);
+        });
+      });
+    }
+};

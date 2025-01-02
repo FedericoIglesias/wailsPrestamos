@@ -1,6 +1,7 @@
 import { GetAllClient, GetClientPopUp } from "../../wailsjs/go/main/App.js";
 import { Client } from "../vite-env.js";
 import { popUpClientInfo } from "./ClientPopUp.js";
+import { detailsPrestamos } from "./tablePrestamo.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyClient = $("tbodyClient");
 const listClient = GetAllClient().then((data) => data);
@@ -40,6 +41,7 @@ export const InitTableClient = async () => {
         section.className = "popUpClient";
         section.innerHTML = popUpClientInfo(clientInfo);
         body[0].appendChild(section);
+        detailsPrestamos();
         $("close")?.addEventListener("click", () => {
           body[0].removeChild(section);
         });

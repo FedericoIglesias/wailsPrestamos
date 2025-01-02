@@ -6,7 +6,7 @@ export const PopUpPrestamoInfo = async (prestamo: models.Prestamo) => {
   <section>
   <header>
     <p>Client: ${prestamo.ClientId}</p>
-    <p id="close">&#10060</p>
+    <p id="closeP">&#10060</p>
   </header>
     <section>
     <div>
