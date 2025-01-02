@@ -19,7 +19,9 @@ const createRowClient = (Client: Client) => {
       return capitalize(word);
     })
   }</td>
-  <td>${capitalize(Client.Address)}</td>
+  <td>${Client.Address.split(" ").map((word) => {
+    return capitalize(word);
+  })}</td>
   <td>${Client.Phone}</td>
   <td>${Client.Email}</td>
   <td>${Client.DNI}</td>
