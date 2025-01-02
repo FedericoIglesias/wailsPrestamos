@@ -2,6 +2,7 @@ import { GetAllClient, GetClientPopUp } from "../../wailsjs/go/main/App.js";
 import { Client } from "../vite-env.js";
 import { popUpClientInfo } from "./ClientPopUp.js";
 import { detailsPrestamos } from "./tablePrestamo.js";
+import { capitalize } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyClient = $("tbodyClient");
 const listClient = GetAllClient().then((data) => data);
@@ -9,14 +10,22 @@ const body = document.getElementsByTagName("body");
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
-  <td>${Client.Name + " " + Client.Last_Name}</td>
-  <td>${Client.Address}</td>
+  <td>${
+    Client.Name.split(" ").map((word) => {
+      return capitalize(word);
+    }) +
+    " " +
+    Client.Last_Name.split(" ").map((word) => {
+      return capitalize(word);
+    })
+  }</td>
+  <td>${capitalize(Client.Address)}</td>
   <td>${Client.Phone}</td>
   <td>${Client.Email}</td>
   <td>${Client.DNI}</td>
   <td>${Client.CUIL}</td>
-  <td>${Client.Empresa}</td>
-  <td>${Client.Job}</td>
+  <td>${capitalize(Client.Empresa)}</td>
+  <td>${capitalize(Client.Job)}</td>
   <td><button class="infoClient" id="${Client.ID}">&#128269</button></td>
   </tr>`;
 };

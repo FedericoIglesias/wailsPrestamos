@@ -1,4 +1,5 @@
 import { models } from "../../wailsjs/go/models";
+import { capitalize } from "./utils";
 
 export const PopUpPrestamoInfo = (
   prestamo: models.Prestamo,
@@ -8,7 +9,9 @@ export const PopUpPrestamoInfo = (
   return `<body class="popUp">
   <section>
   <header>
-    <p>${client}</p>
+    <p>${client.split("  ").map((word) => {
+      return capitalize(word);
+    })}</p>
     <p id="closeP">&#10060</p>
   </header>
     <section>
@@ -32,7 +35,7 @@ export const PopUpPrestamoInfo = (
         </thead>
         <tbody id="tbodyPrestamo">
         ${
-          (CheckPay?.map((object: models.CheckPay, index) => {
+          CheckPay?.map((object: models.CheckPay, index) => {
             return `<tr>
             <td>${index + 1}°</td>
             <td>${object.Month}</td>
@@ -40,7 +43,7 @@ export const PopUpPrestamoInfo = (
               object.Pay ? `checked="checked"` : null
             }></td>
           </tr>`;
-          })) || ""
+          }) || ""
         }
         </tbody>
       </table>

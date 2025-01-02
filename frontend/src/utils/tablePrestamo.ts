@@ -45,7 +45,6 @@ export const detailsPrestamos = () => {
         const section = document.createElement("body");
         section.className = "popUp";
         section.innerHTML = PopUpPrestamoInfo(prestamo, row.id.split(".")[1]);
-        console.log(row.id);
         body[0].appendChild(section);
         $("closeP")?.addEventListener("click", () => {
           body[0].removeChild(section);

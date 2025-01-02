@@ -1,4 +1,5 @@
 import { ClientPopUp, PrestamoToPopUpClient } from "../vite-env";
+import { capitalize } from "./utils";
 
 export const popUpClientInfo = (client: ClientPopUp) => {
   const { AmountPaid, AmountToPay } = calculateAmount(client.Prestamos);
@@ -12,14 +13,18 @@ export const popUpClientInfo = (client: ClientPopUp) => {
     <section>
       <div>
         <p>Información Personal:</p>
-        <p>Nombre: ${client.Name}</p>
-        <p>Apellido: ${client.Last_Name}</p>
+        <p>Nombre: ${client.Name.split(" ").map((word) => {
+          return capitalize(word);
+        })}</p>
+        <p>Apellido: ${client.Last_Name.split(" ").map((word) => {
+          return capitalize(word);
+        })}</p>
         <p>DNI: ${client.DNI}</p>
         <p>CUIL: ${client.CUIL}</p>
         <p>Teléfono: ${client.Phone}</p>
-        <p>Dirección: ${client.Address}</p>
-        <p>Empresa: ${client.Empresa}</p>
-        <p>Puesto: ${client.Job}</p>
+        <p>Dirección: ${capitalize(client.Address)}</p>
+        <p>Empresa: ${capitalize(client.Empresa)}</p>
+        <p>Puesto: ${capitalize(client.Job)}</p>
       </div>
       <div>
         <p>Información Prestamos:</p>
