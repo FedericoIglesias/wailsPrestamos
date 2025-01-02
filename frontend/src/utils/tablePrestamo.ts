@@ -43,7 +43,7 @@ export const detailsPrestamos = () => {
       row.addEventListener("click", async () => {
         const prestamo = await GetPrestamo(row.id);
         const section = document.createElement("body");
-        section.className = "popUpClient";
+        section.className = "popUp";
         section.innerHTML = await PopUpPrestamoInfo(prestamo);
         body[0].appendChild(section);
         $("closeP")?.addEventListener("click", () => {

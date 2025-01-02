@@ -3,10 +3,11 @@ import { ClientPopUp, PrestamoToPopUpClient } from "../vite-env";
 export const popUpClientInfo = (client: ClientPopUp) => {
   const { AmountPaid, AmountToPay } = calculateAmount(client.Prestamos);
 
-  return `<body class="popUpClient">
+  return `<body class="popUp">
   <section>
     <header>
-      <p id="close">Cerrar</p>
+      <p></p>
+      <p id="close">&#10060</p>
     </header>
     <section>
       <div>

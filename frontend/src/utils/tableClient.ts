@@ -38,7 +38,7 @@ export const InitTableClient = async () => {
       row.addEventListener("click", async () => {
         const clientInfo = await GetClientPopUp(row.id);
         const section = document.createElement("body");
-        section.className = "popUpClient";
+        section.className = "popUp";
         section.innerHTML = popUpClientInfo(clientInfo);
         body[0].appendChild(section);
         detailsPrestamos();

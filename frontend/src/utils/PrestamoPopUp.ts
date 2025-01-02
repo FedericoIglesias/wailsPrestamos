@@ -2,7 +2,7 @@ import { models } from "../../wailsjs/go/models";
 
 export const PopUpPrestamoInfo = async (prestamo: models.Prestamo) => {
   const CheckPay = prestamo.CheckPay || [];
-  return `<body class="popUpClient">
+  return `<body class="popUp">
   <section>
   <header>
     <p>Client: ${prestamo.ClientId}</p>

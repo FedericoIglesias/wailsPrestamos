@@ -183,7 +183,7 @@ section {
     display: none;
 }
 
-.popUpClient {
+.popUp {
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0;
@@ -206,26 +206,29 @@ section {
         color: white;
         padding: 10px;
         border-radius: 6px 6px 0 0;
-        text-align: center;
-        cursor: pointer;
+        /* text-align: center; */
+        display: flex;
+        justify-content: space-between;
     }
 
     header p {
         margin: 0;
         font-size: 1.2rem;
         font-weight: bold;
-        background-color: #0056b3;
         padding: 8px 16px;
         border-radius: 4px;
         color: white;
+    }
+
+    header p:last-child {
         transition: background-color 0.3s ease, transform 0.2s ease;
         display: inline-block;
         cursor: pointer;
-    }
 
-    header p:hover {
-        background-color: #003f8a;
-        transform: scale(1.05);
+        &:hover {
+            background-color: #003f8a;
+            transform: scale(1.05);
+        }
     }
 
 
