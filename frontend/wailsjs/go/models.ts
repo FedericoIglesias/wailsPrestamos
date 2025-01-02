@@ -1,5 +1,19 @@
 export namespace models {
 	
+	export class CheckPay {
+	    Month: string;
+	    Pay: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new CheckPay(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.Month = source["Month"];
+	        this.Pay = source["Pay"];
+	    }
+	}
 	export class Client {
 	    ID: string;
 	    Name: string;
@@ -90,6 +104,54 @@ export namespace models {
 	        this.AmountDue = source["AmountDue"];
 	        this.AmountPaid = source["AmountPaid"];
 	        this.Prestamos = this.convertValues(source["Prestamos"], PrestamoToPopUpClient);
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
+	export class Prestamo {
+	    ID: string;
+	    Amount: string;
+	    Interest: string;
+	    Cuota: string;
+	    Date: string;
+	    ClientId: string;
+	    TotalAmount: string;
+	    AmountForQuota: string;
+	    AmountPaid: string;
+	    CheckPay: CheckPay[];
+	
+	    static createFrom(source: any = {}) {
+	        return new Prestamo(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.ID = source["ID"];
+	        this.Amount = source["Amount"];
+	        this.Interest = source["Interest"];
+	        this.Cuota = source["Cuota"];
+	        this.Date = source["Date"];
+	        this.ClientId = source["ClientId"];
+	        this.TotalAmount = source["TotalAmount"];
+	        this.AmountForQuota = source["AmountForQuota"];
+	        this.AmountPaid = source["AmountPaid"];
+	        this.CheckPay = this.convertValues(source["CheckPay"], CheckPay);
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {

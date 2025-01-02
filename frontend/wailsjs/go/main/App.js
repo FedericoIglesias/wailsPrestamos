@@ -14,6 +14,10 @@ export function GetClientPopUp(arg1) {
   return window['go']['main']['App']['GetClientPopUp'](arg1);
 }
 
+export function GetPrestamo(arg1) {
+  return window['go']['main']['App']['GetPrestamo'](arg1);
+}
+
 export function SaveClient(arg1) {
   return window['go']['main']['App']['SaveClient'](arg1);
 }

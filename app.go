@@ -25,7 +25,11 @@ func (a *App) SaveClient(Client models.Client) {
 	if err != nil {
 		panic(err)
 	}
-	driver.Write("clients", Client.ID, Client)
+	err = driver.Write("clients", Client.ID, Client)
+	if err != nil {
+		panic(err)
+	}
+
 }
 
 func (a *App) GetAllClient() []models.Client {
@@ -40,7 +44,7 @@ func (a *App) GetAllClient() []models.Client {
 	records, err := driver.ReadAll("clients")
 
 	if err != nil {
-		panic(err)
+		return nil
 	}
 
 	for _, client := range records {
@@ -95,7 +99,7 @@ func (a *App) GetAllPrestamoTable() []models.PrestamoTable {
 	records, err := driver.ReadAll("prestamos")
 
 	if err != nil {
-		panic(err)
+		return nil
 	}
 
 	for _, prestamo := range records {
@@ -171,11 +175,10 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 		panic(err)
 	}
 	client := &models.ClientPopUp{}
-	driver.Read("clients", ID, client)
 
 	recordsPrestamos, err := driver.ReadAll("prestamos")
 	if err != nil {
-		panic(err)
+		return nil
 	}
 
 	for _, r := range recordsPrestamos {
@@ -199,4 +202,19 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 	}
 
 	return client
+}
+
+func (a *App) GetPrestamo(ID string) *models.Prestamo {
+	driver, err := local_db.New("./db", nil)
+	if err != nil {
+		panic(err)
+	}
+
+	prestamo := &models.Prestamo{}
+
+	if err = driver.Read("prestamos", ID, prestamo); err != nil {
+		return nil
+	}
+
+	return prestamo
 }
