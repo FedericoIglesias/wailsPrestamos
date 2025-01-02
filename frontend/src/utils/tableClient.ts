@@ -1,6 +1,6 @@
 import { GetAllClient, GetClientPopUp } from "../../wailsjs/go/main/App.js";
 import { Client } from "../vite-env.js";
-import { popUpClientInfo } from "./ClientpopUp.js";
+import { popUpClientInfo } from "./ClientPopUp.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyClient = $("tbodyClient");
 const listClient = GetAllClient().then((data) => data);

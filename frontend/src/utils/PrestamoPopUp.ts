@@ -1,44 +1,47 @@
-export const PopUpPrestamoInfo = () => {
-  return `<body class="popUpPrestamo">
+import { models } from "../../wailsjs/go/models";
+
+export const PopUpPrestamoInfo = async (prestamo: models.Prestamo) => {
+  const CheckPay = prestamo.CheckPay || [];
+  return `<body class="popUpClient">
+  <section>
   <header>
-    <p>Client: ${null}</p>
+    <p>Client: ${prestamo.ClientId}</p>
     <p id="close">&#10060</p>
   </header>
-  <main>
     <section>
-      <p>Monto: ${null}</p>
-      <p>Intereses: ${null}</p>
-      <p>Fecha: ${null}</p>
-      <p>Cuotas: ${null}</p>
+    <div>
+      <p>Detalles:</p>
+      <p>Monto: ${prestamo.Amount}</p>
+      <p>Intereses: ${prestamo.Interest}</p>
+      <p>Fecha: ${new Date(prestamo.Date).toLocaleDateString("es-ES")}</p>
+      <p>Cuotas: ${prestamo.Cuota}</p>
       <p>Resta: ${null}</p>
       <p>Estado: ${null}</p>
-    </section>
-    <section>
-      <h4>Cuotas: </h4>
-      <div>
-        <article>
-          <label for="">12/25</label>
-          <input type="checkbox">
-        </article>
-        <article>
-          <label for="">12/25</label>
-          <input type="checkbox">
-        </article>
-        <article>
-          <label for="">12/25</label>
-          <input type="checkbox">
-        </article>
-        <article>
-          <label for="">12/25</label>
-          <input type="checkbox">
-        </article>
-        <article>
-          <label for="">12/25</label>
-          <input type="checkbox">
-        </article>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Cuota N°</th>
+            <th>Mes</th>
+            <th>Pagado</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPrestamo">
+        ${await CheckPay?.map((object: models.CheckPay, index) => {
+          return `<tr>
+            <td>${index + 1}°</td>
+            <td>${object.Month}</td>
+            <td style="text-aling:center"><input type="checkbox" ${
+              object.Pay ? `checked="checked"` : null
+            }></td>
+          </tr>`;
+        })}
+        </tbody>
+      </table>
       </div>
     </section>
-  </main>
+  </section>
 </body>
   `;
 };

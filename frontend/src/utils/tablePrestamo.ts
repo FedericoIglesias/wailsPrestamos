@@ -1,4 +1,4 @@
-import { GetAllPrestamoTable } from "../../wailsjs/go/main/App.js";
+import { GetAllPrestamoTable, GetPrestamo } from "../../wailsjs/go/main/App.js";
 import { PrestamoPlus } from "../vite-env.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
 const $ = (id: string) => document.getElementById(id);
@@ -36,9 +36,10 @@ export const initTablePrestamo = async () => {
     if (rows.length)
       for (const row of rows) {
         row.addEventListener("click", async () => {
+          const prestamo = await GetPrestamo(row.id)
           const section = document.createElement("body");
-          section.className = "popUpPrestamo";
-          section.innerHTML = PopUpPrestamoInfo();
+          section.className = "popUpClient";
+          section.innerHTML = await PopUpPrestamoInfo(prestamo);
           body[0].appendChild(section);
           $("close")?.addEventListener("click", () => {
             body[0].removeChild(section);
@@ -47,3 +48,5 @@ export const initTablePrestamo = async () => {
       }
   }
 };
+
+
