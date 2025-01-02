@@ -77,6 +77,10 @@ export const showCalculated = (toPay: number) => {
 };
 
 export const fillSelectClient = async () => {
+  while (selectClient.firstChild) {
+    selectClient.removeChild(selectClient.firstChild);
+  }
+  selectClient.add(document.createElement("option"));
   (await listClient).map((client: Client) => {
     let option: HTMLOptionElement = document.createElement("option");
     option.value = client.ID;
