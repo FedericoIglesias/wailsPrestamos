@@ -46,14 +46,14 @@ export const PopUpPrestamoInfo = (
 };
 
 const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
+  let text = "";
   if (!listCheckPay) return "";
-  return listCheckPay?.map((object: models.CheckPay, index) => {
-    return `<tr>
-    <td>${index + 1}°</td>
-    <td>${object.Month}</td>
-    <td style="text-aling:center"><input type="checkbox" ${
-      object.Pay ? `checked="checked"` : null
-    } id="checked${index}" ></td>
-  </tr>`;
-  });
+  for (let i = 0; i < listCheckPay.length; ++i) {
+    text += `<tr><td>${i + 1}°</td><td>${
+      listCheckPay[i].Month
+    }</td><td style="text-aling:center"><input type="checkbox" ${
+      listCheckPay[i].Pay ? `checked="checked"` : null
+    } id="checked${i}" ></td></tr>`;
+  }
+  return text;
 };
