@@ -1,4 +1,5 @@
 import { GetAllPrestamoTable, GetPrestamo } from "../../wailsjs/go/main/App.js";
+import { models } from "../../wailsjs/go/models.js";
 import { PrestamoPlus } from "../vite-env.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
 import { capitalize } from "./utils.js";
@@ -47,9 +48,33 @@ export const detailsPrestamos = () => {
         section.className = "popUp";
         section.innerHTML = PopUpPrestamoInfo(prestamo, row.id.split(".")[1]);
         body[0].appendChild(section);
+        document
+          .getElementsByClassName("savePrestamo")[0]
+          .addEventListener("click", () => {
+            savePrestamo(prestamo);
+          });
         $("closeP")?.addEventListener("click", () => {
           body[0].removeChild(section);
         });
       });
     }
+};
+
+export const savePrestamo = (prestamo: models.Prestamo) => {
+  const listInput = Array.from(
+    document.getElementsByTagName("input") as HTMLCollectionOf<HTMLInputElement>
+  );
+  const listCheckPay: models.CheckPay[] = [];
+  for (let input of listInput) {
+    if (input.id.includes("checked")) {
+      const value = ($(input.id) as HTMLInputElement)?.checked;
+      const checPay: models.CheckPay = {
+        Month: "",
+        Pay: value,
+      };
+      listCheckPay.push(checPay);
+    }
+  }
+  prestamo.CheckPay = listCheckPay;
+  console.log(prestamo)
 };
