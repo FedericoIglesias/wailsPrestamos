@@ -1,6 +1,7 @@
 import { GetAllPrestamoTable, GetPrestamo } from "../../wailsjs/go/main/App.js";
 import { PrestamoPlus } from "../vite-env.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
+import { capitalize } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyPrestamo = $("tbodyPrestamo");
 const body = document.getElementsByTagName("body");
@@ -9,7 +10,7 @@ const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
 const createRowPrestamo = (prestamo: PrestamoPlus) => {
   const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
   return `<tr>
-  <td>${prestamo.ClientName}</td>
+  <td>${capitalize(prestamo.ClientName)}</td>
   <td>${prestamo.Amount}</td>
   <td>${prestamo.Interest}</td>
   <td>${date}</td>

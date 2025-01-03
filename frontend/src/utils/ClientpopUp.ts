@@ -13,12 +13,8 @@ export const popUpClientInfo = (client: ClientPopUp) => {
     <section>
       <div>
         <p>Información Personal:</p>
-        <p>Nombre: ${client.Name.split(" ").map((word) => {
-          return capitalize(word);
-        })}</p>
-        <p>Apellido: ${client.Last_Name.split(" ").map((word) => {
-          return capitalize(word);
-        })}</p>
+        <p>Nombre: ${capitalize(client.Name)}</p>
+        <p>Apellido: ${capitalize(client.Last_Name)}</p>
         <p>DNI: ${client.DNI}</p>
         <p>CUIL: ${client.CUIL}</p>
         <p>Teléfono: ${client.Phone}</p>

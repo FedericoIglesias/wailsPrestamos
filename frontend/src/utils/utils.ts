@@ -1,4 +1,9 @@
 export const capitalize = (str: string) => {
-  if(str == " " ||str ==  "") return " "
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  let name = "";
+  const listName = str.split(" ");
+  for (const word of listName) {
+    if (word === " ") continue;
+    name += word.charAt(0).toUpperCase() + word.slice(1) + " ";
+  }
+  return name;
 };

@@ -6,7 +6,6 @@
 
 body {
     background-color: #BBB;
-    /* padding: 5px; */
     height: 730px;
     width: 1010px;
 }
@@ -206,7 +205,6 @@ section {
         color: white;
         padding: 10px;
         border-radius: 6px 6px 0 0;
-        /* text-align: center; */
         display: flex;
         justify-content: space-between;
     }

@@ -9,9 +9,7 @@ export const PopUpPrestamoInfo = (
   return `<body class="popUp">
   <section>
   <header>
-    <p>${client.split("  ").map((word) => {
-      return capitalize(word);
-    })}</p>
+    <p>${capitalize(client)}</p>
     <p id="closeP">&#10060</p>
   </header>
     <section>

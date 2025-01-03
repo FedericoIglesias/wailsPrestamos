@@ -10,18 +10,8 @@ const body = document.getElementsByTagName("body");
 
 const createRowClient = (Client: Client) => {
   return `<tr id=${Client.ID}>
-  <td>${
-    Client.Name.split(" ").map((word) => {
-      return capitalize(word);
-    }) +
-    " " +
-    Client.Last_Name.split(" ").map((word) => {
-      return capitalize(word);
-    })
-  }</td>
-  <td>${Client.Address.split(" ").map((word) => {
-    return capitalize(word);
-  })}</td>
+  <td>${capitalize(Client.Name + " " + Client.Last_Name)}</td>
+  <td>${capitalize(Client.Address)}</td>
   <td>${Client.Phone}</td>
   <td>${Client.Email}</td>
   <td>${Client.DNI}</td>
