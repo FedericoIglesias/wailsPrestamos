@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"prestamos/internal/models"
 	"sort"
-	"time"
 
 	"github.com/FedericoIglesias/local_db"
 )
@@ -66,7 +65,7 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 		panic(err)
 	}
 
-	listCheckPay := FillMonth(prestamo.Date, prestamo.Cuota)
+	listCheckPay := FillQuote(prestamo.Cuota)
 
 	err = driver.Write("prestamos", prestamo.ID, &models.Prestamo{
 		ID:             prestamo.ID,
@@ -136,32 +135,22 @@ func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client
 	return listPrestamoTable
 }
 
-func FillMonth(Date json.Number, cuotas json.Number) []models.CheckPay {
+func FillQuote(quotas json.Number) []models.CheckPay {
 	listCheckPay := []models.CheckPay{}
 
-	jsTime, err := Date.Int64()
-	if err != nil {
-		fmt.Printf("%v ", err)
-	}
-
-	t := time.Unix(jsTime/1000, 0)
-
-	month := int64(t.Month())
-
-	c, err := cuotas.Int64()
+	c, err := quotas.Int64()
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
+	var count int64 = 0
+
 	for range c {
-		if month+1 == 13 {
-			month = 0
-		}
-		month += 1
+		count += 1
 		checkPay := models.CheckPay{
-			Month: fmt.Sprintf("%d", month),
-			Pay:   false,
+			QuotaNumber: json.Number(fmt.Sprintf("%d", count)),
+			Pay:         false,
 		}
 		listCheckPay = append(listCheckPay, checkPay)
 	}

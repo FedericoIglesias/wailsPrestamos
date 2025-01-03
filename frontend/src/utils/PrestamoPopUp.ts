@@ -5,7 +5,6 @@ export const PopUpPrestamoInfo = (
   prestamo: models.Prestamo,
   client: string
 ) => {
-  const CheckPay = prestamo.CheckPay || [];
   return `<body class="popUp">
   <section>
   <header>
@@ -32,7 +31,7 @@ export const PopUpPrestamoInfo = (
           </tr>
         </thead>
         <tbody id="tbodyPrestamo">
-        ${insertCheckPay(CheckPay)}
+        ${insertCheckPay(prestamo.CheckPay)}
         </tbody>
       </table>
       </div>
@@ -48,7 +47,7 @@ const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
   if (!listCheckPay) return "";
   for (let i = 0; i < listCheckPay.length; ++i) {
     text += `<tr><td>${i + 1}°</td><td>${
-      listCheckPay[i].Month
+      listCheckPay[i].QuotaNumber
     }</td><td style="text-aling:center"><input type="checkbox" ${
       listCheckPay[i].Pay ? `checked="checked"` : null
     } id="checked${i}" ></td></tr>`;

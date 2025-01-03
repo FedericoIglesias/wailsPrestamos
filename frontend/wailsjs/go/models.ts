@@ -1,7 +1,7 @@
 export namespace models {
 	
 	export class CheckPay {
-	    Month: string;
+	    QuotaNumber: string;
 	    Pay: boolean;
 	
 	    static createFrom(source: any = {}) {
@@ -10,7 +10,7 @@ export namespace models {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
-	        this.Month = source["Month"];
+	        this.QuotaNumber = source["QuotaNumber"];
 	        this.Pay = source["Pay"];
 	    }
 	}

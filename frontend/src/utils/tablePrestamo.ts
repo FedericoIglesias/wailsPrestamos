@@ -73,7 +73,7 @@ export const savePrestamo = (prestamo: models.Prestamo) => {
     if (input.id.includes("checked")) {
       const value = ($(input.id) as HTMLInputElement)?.checked;
       const checPay: models.CheckPay = {
-        Month: "",
+        QuotaNumber: input.id.split("checked")[1],
         Pay: value,
       };
       listCheckPay.push(checPay);
