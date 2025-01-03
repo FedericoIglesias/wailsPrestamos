@@ -25,3 +25,7 @@ export function SaveClient(arg1) {
 export function SavePrestamo(arg1) {
   return window['go']['main']['App']['SavePrestamo'](arg1);
 }
+
+export function UpdatePrestamo(arg1) {
+  return window['go']['main']['App']['UpdatePrestamo'](arg1);
+}

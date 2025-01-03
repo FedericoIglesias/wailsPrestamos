@@ -13,3 +13,5 @@ export function GetPrestamo(arg1:string):Promise<models.Prestamo>;
 export function SaveClient(arg1:models.Client):Promise<void>;
 
 export function SavePrestamo(arg1:models.PrestamoBrought):Promise<void>;
+
+export function UpdatePrestamo(arg1:models.Prestamo):Promise<void>;

@@ -223,3 +223,14 @@ func (a *App) GetPrestamo(ID string) *models.Prestamo {
 
 	return prestamo
 }
+
+func (a *App) UpdatePrestamo(prestamo models.Prestamo) {
+	driver, err := local_db.New("./db", nil)
+	if err != nil {
+		panic(err)
+	}
+
+	if err = driver.Write("prestamos", prestamo.ID, prestamo); err != nil {
+		panic(err)
+	}
+}

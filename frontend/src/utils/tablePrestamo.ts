@@ -1,4 +1,8 @@
-import { GetAllPrestamoTable, GetPrestamo } from "../../wailsjs/go/main/App.js";
+import {
+  GetAllPrestamoTable,
+  GetPrestamo,
+  UpdatePrestamo,
+} from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 import { PrestamoPlus } from "../vite-env.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
@@ -76,5 +80,5 @@ export const savePrestamo = (prestamo: models.Prestamo) => {
     }
   }
   prestamo.CheckPay = listCheckPay;
-  console.log(prestamo)
+  UpdatePrestamo(prestamo);
 };
