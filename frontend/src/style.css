@@ -122,53 +122,28 @@ section {
 }
 
 
-.table-prestamo {
+.table {
     border-collapse: collapse;
 }
 
-.table-prestamo th,
-.table-prestamo td {
+.table th,
+.table td {
     border: 1px solid #ccc;
     padding: 10px;
 }
 
-.table-prestamo th {
+.table th {
     background-color: #333;
     color: #fff;
 }
 
-.table-prestamo tr:nth-child(even) {
+.table tr:nth-child(even) {
     background-color: #f1f1f1;
 }
 
-.table-prestamo tr:hover {
+.table tr:hover {
     background-color: #ccc;
 }
-
-
-.table-client {
-    border-collapse: collapse;
-}
-
-.table-client th,
-.table-client td {
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-
-.table-client th {
-    background-color: #333;
-    color: #fff;
-}
-
-.table-client tr:nth-child(even) {
-    background-color: #f1f1f1;
-}
-
-.table-client tr:hover {
-    background-color: #ccc;
-}
-
 
 .descriptionPrestamo p {
     font-size: 20px;
