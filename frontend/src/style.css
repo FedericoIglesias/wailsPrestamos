@@ -27,20 +27,21 @@ aside {
     background-color: #f1f1f1;
     padding: 20px;
 
-    ul {
-        list-style: none;
-        padding: 0;
-    }
+}
 
-    li {
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-        cursor: pointer;
-    }
+aside ul {
+    list-style: none;
+    padding: 0;
+}
 
-    li:hover {
-        background-color: #ccc;
-    }
+aside li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+aside li:hover {
+    background-color: #ccc;
 }
 
 section {
@@ -48,135 +49,131 @@ section {
     width: 80%;
 }
 
-.add-client {
-    div {
-        padding: 20px;
-
-        span {
-            color: red;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 500px;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #555;
-            }
-        }
-    }
+.add-client div {
+    padding: 20px;
 }
 
-.add-prestamo {
-    div {
-        padding: 20px;
-        background-color: #f1f1f1;
-
-        span {
-            color: red;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 500px;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #555;
-            }
-        }
-    }
+.add-client div span {
+    color: red;
 }
+
+.add-client div label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-client div input {
+    width: 500px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.add-client div button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+
+}
+
+.add-client div button :hover {
+    background-color: #555;
+}
+
+.add-prestamo div {
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.add-prestamo div span {
+    color: red;
+}
+
+.add-prestamo div label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+.add-prestamo div input {
+    width: 500px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.add-prestamo div select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.add-prestamo div button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+
+}
+
+.add-prestamo div button:hover {
+    background-color: #555;
+}
+
 
 .table-prestamo {
     border-collapse: collapse;
-
-    th,
-    td {
-        border: 1px solid #ccc;
-        padding: 10px;
-    }
-
-    ::first-letter {
-        transform: capitalize;
-    }
-
-    th {
-        background-color: #333;
-        color: #fff;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f1f1f1;
-    }
-
-    tr:hover {
-        background-color: #ccc;
-    }
 }
+
+.table-prestamo th,
+.table-prestamo td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.table-prestamo th {
+    background-color: #333;
+    color: #fff;
+}
+
+.table-prestamo tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.table-prestamo tr:hover {
+    background-color: #ccc;
+}
+
 
 .table-client {
-    display: none;
     border-collapse: collapse;
-
-    th,
-    td {
-        border: 1px solid #ccc;
-        padding: 10px;
-    }
-
-    th {
-        background-color: #333;
-        color: #fff;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f1f1f1;
-    }
-
-    tr:hover {
-        background-color: #ccc;
-    }
 }
 
-.descriptionPrestamo {
-    p {
-        font-size: 20px;
-    }
+.table-client th,
+.table-client td {
+    border: 1px solid #ccc;
+    padding: 10px;
 }
+
+.table-client th {
+    background-color: #333;
+    color: #fff;
+}
+
+.table-client tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.table-client tr:hover {
+    background-color: #ccc;
+}
+
+
+.descriptionPrestamo p {
+    font-size: 20px;
+}
+
 
 .display-none {
     display: none;
@@ -188,102 +185,103 @@ section {
     top: 0;
     left: 0;
     overflow: auto;
-
-    section {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 20px;
-        margin: 20px auto;
-        max-width: 700px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    header {
-        background-color: #007BFF;
-        color: white;
-        padding: 10px;
-        border-radius: 6px 6px 0 0;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    header p {
-        margin: 0;
-        font-size: 1.2rem;
-        font-weight: bold;
-        padding: 8px 16px;
-        border-radius: 4px;
-        color: white;
-    }
-
-    header p:last-child {
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        display: inline-block;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #003f8a;
-            transform: scale(1.05);
-        }
-    }
-
-
-    section section {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    div {
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 15px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    div p {
-        margin: 5px 0;
-        line-height: 1.6;
-        color: #333;
-    }
-
-    div p:first-child {
-        font-weight: bold;
-        color: #007BFF;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-
-    table th,
-    table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-        font-size: 0.9rem;
-    }
-
-    tr:hover {
-        background-color: #e6f7ff;
-    }
-
-    table th {
-        background-color: #007BFF;
-        color: white;
-        font-weight: bold;
-    }
-
-    table tbody tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
 }
+
+.popUp section {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popUp header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popUp header p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: white;
+}
+
+.popUp header p:last-child {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.popUp header p:last-child:hover {
+    background-color: #003f8a;
+    transform: scale(1.05);
+}
+
+
+.popUp section section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.popUp div {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.popUp div p {
+    margin: 5px 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.popUp div p:first-child {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.popUp table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.popUp table th,
+.popUp table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.popUp tr:hover {
+    background-color: #e6f7ff;
+}
+
+.popUp table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+.popUp table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 
 .infoClient,
 .infoPrestamo {
@@ -291,7 +289,9 @@ section {
     background: none;
     cursor: pointer;
 
-    &:hover {
-        transform: scale(1.5);
-    }
+}
+
+.infoClient,
+.infoPrestamo :hover {
+    transform: scale(1.5);
 }
