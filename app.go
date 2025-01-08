@@ -69,6 +69,7 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 
 	err = driver.Write("prestamos", prestamo.ID, &models.Prestamo{
 		ID:             prestamo.ID,
+		PrestamoNumber: prestamo.PrestamoNumber,
 		Amount:         prestamo.Amount,
 		Interest:       prestamo.Interest,
 		Cuota:          prestamo.Cuota,
@@ -167,12 +168,12 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 	client := &models.ClientPopUp{}
 
 	if err = driver.Read("clients", ID, client); err != nil {
-		panic(err)
+		return nil
 	}
 
 	recordsPrestamos, err := driver.ReadAll("prestamos")
 	if err != nil {
-		panic(err)
+		return client
 	}
 
 	for _, r := range recordsPrestamos {

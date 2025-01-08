@@ -18,15 +18,12 @@ export const PopUpPrestamoInfo = (
       <p>Intereses: ${prestamo.Interest}</p>
       <p>Fecha: ${new Date(prestamo.Date).toLocaleDateString("es-ES")}</p>
       <p>Cuotas: ${prestamo.Cuota}</p>
-      <p>Resta: ${null}</p>
-      <p>Estado: ${null}</p>
     </div>
     <div>
       <table>
         <thead>
           <tr>
             <th>Cuota N°</th>
-            <th>Mes</th>
             <th>Pagado</th>
           </tr>
         </thead>
@@ -46,7 +43,7 @@ const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
   let text = "";
   if (!listCheckPay) return "";
   for (let i = 0; i < listCheckPay.length; ++i) {
-    text += `<tr><td>${i + 1}°</td><td>${
+    text += `<tr><td>${
       listCheckPay[i].QuotaNumber
     }</td><td style="text-aling:center"><input type="checkbox" ${
       listCheckPay[i].Pay ? `checked="checked"` : null

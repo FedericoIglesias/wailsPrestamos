@@ -4,7 +4,6 @@ import {
   UpdatePrestamo,
 } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
-import { PrestamoPlus } from "../vite-env.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
 import { capitalize } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
@@ -12,15 +11,15 @@ const tbodyPrestamo = $("tbodyPrestamo");
 const body = document.getElementsByTagName("body");
 const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
 
-const createRowPrestamo = (prestamo: PrestamoPlus) => {
+const createRowPrestamo = (prestamo: models.PrestamoTable) => {
   const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
   return `<tr>
   <td>${capitalize(prestamo.ClientName)}</td>
+  <td>${prestamo.PrestamoNumber}</td>
   <td>${prestamo.Amount}</td>
   <td>${prestamo.Interest}</td>
   <td>${date}</td>
   <td>${prestamo.Cuota}</td>
-  <td>${null}</td>
   <td><button class="infoPrestamo" id="${
     prestamo.ID + "." + prestamo.ClientName
   }">&#128269</button></td>
@@ -33,7 +32,7 @@ export const initTablePrestamo = async () => {
       tbodyPrestamo.removeChild(tbodyPrestamo.firstChild);
     }
     if (listPrestamoPlus)
-      (await listPrestamoPlus).map((Prestamo: PrestamoPlus) => {
+      (await listPrestamoPlus).map((Prestamo: models.PrestamoTable) => {
         const row = createRowPrestamo(Prestamo);
         tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
       });

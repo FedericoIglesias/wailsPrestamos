@@ -1,10 +1,11 @@
 import { GetAllClient, SavePrestamo } from "../../wailsjs/go/main/App.js";
-import { Client, PrestamoBrought } from "../vite-env.js";
+import { models } from "../../wailsjs/go/models.js";
 const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
 const inputAmount = $("inputAmount") as HTMLInputElement;
 const inputInterest = $("inputInterest") as HTMLInputElement;
 const inputCuota = $("inputCuota") as HTMLInputElement;
+const inputPrestmoNumber = $("inputPrestmoNumber") as HTMLInputElement;
 const inputDate = $("inputDate") as HTMLInputElement;
 const selectClient = $("selectClient") as HTMLSelectElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
@@ -12,8 +13,9 @@ const listClient = GetAllClient().then((data) => data);
 
 const createPrestamo = () => {
   const totalAmount = calculatePrestamo().toPay;
-  const prestamo: PrestamoBrought = {
+  const prestamo: models.PrestamoBrought = {
     ID: "P" + new Date().getTime().toString(),
+    PrestamoNumber: inputPrestmoNumber.value,
     Amount: inputAmount.value,
     Interest: inputInterest.value,
     Cuota: inputCuota.value,
@@ -81,7 +83,7 @@ export const fillSelectClient = async () => {
     selectClient.removeChild(selectClient.firstChild);
   }
   selectClient.add(document.createElement("option"));
-  (await listClient).map((client: Client) => {
+  (await listClient).map((client: models.Client) => {
     let option: HTMLOptionElement = document.createElement("option");
     option.value = client.ID;
     option.text = client.DNI + "--" + client.Name + " " + client.Last_Name;

@@ -19,12 +19,14 @@ export namespace models {
 	    Name: string;
 	    Last_Name: string;
 	    Address: string;
+	    Zone: string;
+	    Partido: string;
 	    Phone: string;
-	    Email: string;
 	    DNI: string;
 	    CUIL: string;
 	    Empresa: string;
 	    Job: string;
+	    JobPlace: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Client(source);
@@ -36,16 +38,19 @@ export namespace models {
 	        this.Name = source["Name"];
 	        this.Last_Name = source["Last_Name"];
 	        this.Address = source["Address"];
+	        this.Zone = source["Zone"];
+	        this.Partido = source["Partido"];
 	        this.Phone = source["Phone"];
-	        this.Email = source["Email"];
 	        this.DNI = source["DNI"];
 	        this.CUIL = source["CUIL"];
 	        this.Empresa = source["Empresa"];
 	        this.Job = source["Job"];
+	        this.JobPlace = source["JobPlace"];
 	    }
 	}
 	export class PrestamoToPopUpClient {
 	    ID: string;
+	    PrestamoNumber: string;
 	    Amount: string;
 	    Interest: string;
 	    Cuota: string;
@@ -61,6 +66,7 @@ export namespace models {
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
+	        this.PrestamoNumber = source["PrestamoNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
 	        this.Cuota = source["Cuota"];
@@ -126,6 +132,7 @@ export namespace models {
 	}
 	export class Prestamo {
 	    ID: string;
+	    PrestamoNumber: string;
 	    Amount: string;
 	    Interest: string;
 	    Cuota: string;
@@ -143,6 +150,7 @@ export namespace models {
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
+	        this.PrestamoNumber = source["PrestamoNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
 	        this.Cuota = source["Cuota"];
@@ -174,6 +182,7 @@ export namespace models {
 	}
 	export class PrestamoBrought {
 	    ID: string;
+	    PrestamoNumber: string;
 	    Amount: string;
 	    Interest: string;
 	    Cuota: string;
@@ -189,6 +198,7 @@ export namespace models {
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
+	        this.PrestamoNumber = source["PrestamoNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
 	        this.Cuota = source["Cuota"];
@@ -200,6 +210,7 @@ export namespace models {
 	}
 	export class PrestamoTable {
 	    ID: string;
+	    PrestamoNumber: string;
 	    Amount: string;
 	    Interest: string;
 	    Cuota: string;
@@ -214,6 +225,7 @@ export namespace models {
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
+	        this.PrestamoNumber = source["PrestamoNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
 	        this.Cuota = source["Cuota"];

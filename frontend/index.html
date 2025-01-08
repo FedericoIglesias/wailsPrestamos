@@ -14,14 +14,16 @@
     <main>
         <aside>
             <ul>
-                <li id="add-prestamo">Agregar Prestamo</li>
                 <li id="add-client">Agregar Cliente</li>
+                <li id="add-prestamo">Agregar Prestamo</li>
                 <li id="table-client">Tabla Clientes</li>
                 <li id="table-prestamo">Tabla Prestamos</li>
             </ul>
         </aside>
         <section class="add-prestamo display-none">
             <div action="">
+                <label for="">N° Prestamo</label>
+                <input id="inputPrestmoNumber" type="text">
                 <label for="">Monto</label>
                 <input id="inputAmount" type="number">
                 <label for="">Interes</label>
@@ -41,24 +43,28 @@
         </section>
         <section class="add-client display-none">
             <div>
-                <label for="">Nombre<span>*</span></label>
+                <label for="">Nombre</label>
                 <input id="inptName" type="text">
-                <label for="">Apellido<span>*</span></label>
+                <label for="">Apellido</label>
                 <input id="inptLastName" type="text">
-                <label for="">Dirección<span>*</span></label>
+                <label for="">Dirección</label>
                 <input id="inptAddress" type="text">
-                <label for="">Teléfono<span>*</span></label>
+                <label for="">Localidad</label>
+                <input id="inptZone" type="text">
+                <label for="">Partido</label>
+                <input id="inptPartido" type="text">
+                <label for="">Teléfono</label>
                 <input id="inptPhone" type="number">
-                <label for="">Email</label>
-                <input id="inptEmail" type="text">
-                <label for="">D.N.I.<span>*</span></label>
+                <label for="">D.N.I.</label>
                 <input id="inptDNI" type="number">
-                <label for="">CUIL<span>*</span></label>
+                <label for="">CUIL</label>
                 <input id="inptCUIL" type="number">
                 <label for="">Empresa</label>
                 <input id="inptEmpresa" type="text">
-                <label for="">Puesto <span>*</span></label>
+                <label for="">Puesto</label>
                 <input id="inptJob" type="text">
+                <label for="">Lugar de trabajo</label>
+                <input id="inptJobPlace" type="text">
                 <br>
                 <button id="btnClient">Agregar Cliente</button>
             </div>
@@ -70,8 +76,8 @@
                         <tr>
                             <th>Cliente</th>
                             <th>Dirección</th>
+                            <th>Localidad</th>
                             <th>Teléfono</th>
-                            <th>Email</th>
                             <th>D.N.I.</th>
                             <th>CUIL</th>
                             <th>Empresa</th>
@@ -90,12 +96,11 @@
                     <thead>
                         <tr>
                             <th>Cliente</th>
+                            <th>N° Prestamo</th>
                             <th>Monto</th>
                             <th>Intereses</th>
                             <th>Fecha</th>
                             <th>Cuotas</th>
-                            <th>Resta</th>
-                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyPrestamo">

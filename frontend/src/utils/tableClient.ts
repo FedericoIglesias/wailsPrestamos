@@ -1,6 +1,6 @@
 import { GetAllClient, GetClientPopUp } from "../../wailsjs/go/main/App.js";
-import { Client } from "../vite-env.js";
-import { popUpClientInfo } from "./ClientPopUp.js";
+import { models } from "../../wailsjs/go/models.js";
+import { popUpClientInfo } from "./ClientpopUp.js";
 import { detailsPrestamos } from "./tablePrestamo.js";
 import { capitalize } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
@@ -8,12 +8,12 @@ const tbodyClient = $("tbodyClient");
 const listClient = GetAllClient().then((data) => data);
 const body = document.getElementsByTagName("body");
 
-const createRowClient = (Client: Client) => {
+const createRowClient = (Client: models.Client) => {
   return `<tr id=${Client.ID}>
   <td>${capitalize(Client.Name + " " + Client.Last_Name)}</td>
   <td>${capitalize(Client.Address)}</td>
+  <td>${capitalize(Client.Zone)}</td>
   <td>${Client.Phone}</td>
-  <td>${Client.Email}</td>
   <td>${Client.DNI}</td>
   <td>${Client.CUIL}</td>
   <td>${capitalize(Client.Empresa)}</td>
@@ -27,7 +27,7 @@ export const InitTableClient = async () => {
     while (tbodyClient.firstChild) {
       tbodyClient.removeChild(tbodyClient.firstChild);
     }
-    (await listClient).map((client: Client) => {
+    (await listClient).map((client: models.Client) => {
       const row = createRowClient(client);
       tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;
     });

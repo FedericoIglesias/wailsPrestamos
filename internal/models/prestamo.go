@@ -4,6 +4,7 @@ import "encoding/json"
 
 type Prestamo struct {
 	ID             string
+	PrestamoNumber string
 	Amount         json.Number
 	Interest       json.Number
 	Cuota          json.Number
@@ -16,17 +17,19 @@ type Prestamo struct {
 }
 
 type PrestamoTable struct {
-	ID         string
-	Amount     json.Number
-	Interest   json.Number
-	Cuota      json.Number
-	Date       json.Number
-	ClientId   string
-	ClientName string
+	ID             string
+	PrestamoNumber string
+	Amount         json.Number
+	Interest       json.Number
+	Cuota          json.Number
+	Date           json.Number
+	ClientId       string
+	ClientName     string
 }
 
 type PrestamoBrought struct {
 	ID             string
+	PrestamoNumber string
 	Amount         json.Number
 	Interest       json.Number
 	Cuota          json.Number
@@ -38,6 +41,7 @@ type PrestamoBrought struct {
 
 type PrestamoToPopUpClient struct {
 	ID             string
+	PrestamoNumber string
 	Amount         json.Number
 	Interest       json.Number
 	Cuota          json.Number

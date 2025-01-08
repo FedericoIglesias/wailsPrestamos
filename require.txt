@@ -1,6 +1,10 @@
 screen where put interest and saldo
 schedule the customer{
-  direccion,dni, cuil,lugar de trabajo, puesto
+  nombre, apellido, dirección, localidad, partido, telefono, dni, cuil,
+  empresa, puesto, lugar de trabajo.
 }
 
+format prestamo{
+  number of prestamo n°/año
+}
 resume over month

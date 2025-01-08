@@ -9,12 +9,14 @@ type Client struct {
 	Name      string
 	Last_Name string
 	Address   string
+	Zone      string
+	Partido   string
 	Phone     json.Number
-	Email     string
 	DNI       json.Number
 	CUIL      json.Number
 	Empresa   string
 	Job       string
+	JobPlace  string
 }
 
 type ClientPopUp struct {

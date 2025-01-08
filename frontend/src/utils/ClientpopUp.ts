@@ -1,7 +1,7 @@
-import { ClientPopUp, PrestamoToPopUpClient } from "../vite-env";
+import { models } from "../../wailsjs/go/models";
 import { capitalize } from "./utils";
 
-export const popUpClientInfo = (client: ClientPopUp) => {
+export const popUpClientInfo = (client: models.ClientPopUp) => {
   const { AmountPaid, AmountToPay } = calculateAmount(client.Prestamos);
 
   return `<body class="popUp">
@@ -60,7 +60,7 @@ export const popUpClientInfo = (client: ClientPopUp) => {
 </body>`;
 };
 
-const calculateAmount = (listPrestamo: PrestamoToPopUpClient[]) => {
+const calculateAmount = (listPrestamo: models.PrestamoToPopUpClient[]) => {
   let AmountToPay = 0;
   let AmountPaid = 0;
 
