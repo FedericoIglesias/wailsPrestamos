@@ -119,13 +119,14 @@ func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client
 		for _, prestamo := range listPrestamo {
 			if prestamo.ClientId == client.ID {
 				prestamoTable := &models.PrestamoTable{
-					ID:         prestamo.ID,
-					Amount:     prestamo.Amount,
-					Interest:   prestamo.Interest,
-					Cuota:      prestamo.Cuota,
-					Date:       prestamo.Date,
-					ClientId:   prestamo.ClientId,
-					ClientName: client.Name + " " + client.Last_Name,
+					ID:             prestamo.ID,
+					PrestamoNumber: prestamo.PrestamoNumber,
+					Amount:         prestamo.Amount,
+					Interest:       prestamo.Interest,
+					Cuota:          prestamo.Cuota,
+					Date:           prestamo.Date,
+					ClientId:       prestamo.ClientId,
+					ClientName:     client.Name + " " + client.Last_Name,
 				}
 				listPrestamoTable = append(listPrestamoTable, *prestamoTable)
 			}
