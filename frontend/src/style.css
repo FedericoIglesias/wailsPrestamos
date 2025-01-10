@@ -6,8 +6,8 @@
 
 body {
     background-color: #BBB;
-    height: 730px;
-    width: 1010px;
+    min-height: 695px;
+    width: 990px;
 }
 
 input::-webkit-outer-spin-button,
@@ -19,7 +19,8 @@ input::-webkit-inner-spin-button {
 main {
     display: flex;
     padding: 20px;
-    height: 99dvh;
+    min-height: 99dvh;
+    overflow: auto
 }
 
 aside {
