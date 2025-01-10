@@ -15,7 +15,6 @@ const createRowClient = (Client: models.Client) => {
   <td>${checkLong(capitalize(Client.Zone))}</td>
   <td>${checkLong(Client.Phone)}</td>
   <td>${checkLong(Client.DNI)}</td>
-  <td>${checkLong(Client.CUIL)}</td>
   <td>${checkLong(capitalize(Client.Empresa))}</td>
   <td>${checkLong(capitalize(Client.Job))}</td>
   <td><button class="infoClient" id="${Client.ID}">&#128269</button></td>
