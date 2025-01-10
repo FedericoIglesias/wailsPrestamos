@@ -7,7 +7,7 @@
 body {
     background-color: #BBB;
     min-height: 695px;
-    width: 990px;
+    /* width: 1000px; */
 }
 
 input::-webkit-outer-spin-button,
@@ -160,6 +160,7 @@ section {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     overflow: auto;
 }
 
@@ -170,7 +171,6 @@ section {
     border-radius: 8px;
     padding: 20px;
     margin: 20px auto;
-    max-width: 700px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
