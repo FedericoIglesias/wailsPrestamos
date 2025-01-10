@@ -5,7 +5,7 @@ import {
 } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
-import { capitalize } from "./utils.js";
+import { capitalize, checkLong } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyPrestamo = $("tbodyPrestamo");
 const body = document.getElementsByTagName("body");
@@ -14,12 +14,12 @@ const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
 const createRowPrestamo = (prestamo: models.PrestamoTable) => {
   const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
   return `<tr>
-  <td>${capitalize(prestamo.ClientName)}</td>
-  <td>${prestamo.PrestamoNumber}</td>
-  <td>${prestamo.Amount}</td>
-  <td>${prestamo.Interest}</td>
-  <td>${date}</td>
-  <td>${prestamo.Cuota}</td>
+  <td>${checkLong(capitalize(prestamo.ClientName))}</td>
+  <td>${checkLong(prestamo.PrestamoNumber)}</td>
+  <td>${checkLong(prestamo.Amount)}</td>
+  <td>${checkLong(prestamo.Interest)}</td>
+  <td>${checkLong(date)}</td>
+  <td>${checkLong(prestamo.Cuota)}</td>
   <td><button class="infoPrestamo" id="${
     prestamo.ID + "." + prestamo.ClientName
   }">&#128269</button></td>
