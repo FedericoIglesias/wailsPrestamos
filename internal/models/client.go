@@ -1,9 +1,5 @@
 package models
 
-import (
-	"encoding/json"
-)
-
 type Client struct {
 	ID        string
 	Name      string
@@ -11,26 +7,26 @@ type Client struct {
 	Address   string
 	Zone      string
 	Partido   string
-	Phone     json.Number
-	DNI       json.Number
-	CUIL      json.Number
+	Phone     string
+	DNI       string
+	CUIL      string
 	Empresa   string
 	Job       string
 	JobPlace  string
 }
 
 type ClientPopUp struct {
-	Name           string
-	Last_Name      string
-	Address        string
-	Phone          json.Number
-	Email          string
-	DNI            json.Number
-	CUIL           json.Number
-	Empresa        string
-	Job            string
-	PrestamoAmount json.Number
-	AmountDue      json.Number
-	AmountPaid     json.Number
-	Prestamos      []PrestamoToPopUpClient
+	Name       string
+	Last_Name  string
+	Address    string
+	Phone      string
+	Email      string
+	DNI        string
+	CUIL       string
+	Empresa    string
+	Job        string
+	LoanAmount string
+	AmountDue  string
+	AmountPaid string
+	Loans      []LoanToPopUpClient
 }

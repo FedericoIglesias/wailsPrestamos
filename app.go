@@ -59,26 +59,26 @@ func (a *App) GetAllClient() []models.Client {
 	return listClient
 }
 
-func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
+func (a *App) SaveLoan(loan models.LoanBrought) {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		panic(err)
 	}
 
-	listCheckPay := FillQuote(prestamo.Cuota)
+	listCheckPay := FillQuote(loan.Quota)
 
-	err = driver.Write("prestamos", prestamo.ID, &models.Prestamo{
-		ID:             prestamo.ID,
-		PrestamoNumber: prestamo.PrestamoNumber,
-		Amount:         prestamo.Amount,
-		Interest:       prestamo.Interest,
-		Cuota:          prestamo.Cuota,
-		Date:           prestamo.Date,
-		ClientId:       prestamo.ClientId,
+	err = driver.Write("loans", loan.ID, &models.Loan{
+		ID:             loan.ID,
+		LoanNumber:     loan.LoanNumber,
+		Amount:         loan.Amount,
+		Interest:       loan.Interest,
+		Quota:          loan.Quota,
+		Date:           loan.Date,
+		ClientId:       loan.ClientId,
 		CheckPay:       listCheckPay,
-		TotalAmount:    prestamo.TotalAmount,
+		TotalAmount:    loan.TotalAmount,
 		AmountPaid:     "0",
-		AmountForQuota: prestamo.AmountForQuota,
+		AmountForQuota: loan.AmountForQuota,
 	})
 
 	if err != nil {
@@ -87,71 +87,65 @@ func (a *App) SavePrestamo(prestamo models.PrestamoBrought) {
 
 }
 
-func (a *App) GetAllPrestamoTable() []models.PrestamoTable {
+func (a *App) GetAllLoanTable() []models.LoanTable {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
 		panic(err)
 	}
 
-	listPrestamo := []models.Prestamo{}
+	listLoan := []models.Loan{}
 
-	records, err := driver.ReadAll("prestamos")
+	records, err := driver.ReadAll("loans")
 
 	if err != nil {
 		return nil
 	}
 
-	for _, prestamo := range records {
-		p := &models.Prestamo{}
-		if err := json.Unmarshal([]byte(prestamo), &p); err != nil {
+	for _, loan := range records {
+		p := &models.Loan{}
+		if err := json.Unmarshal([]byte(loan), &p); err != nil {
 			panic(err)
 		}
-		listPrestamo = append(listPrestamo, *p)
+		listLoan = append(listLoan, *p)
 	}
 
-	return FillDataPrestamo(listPrestamo, a.GetAllClient())
+	return FillDataLoan(listLoan, a.GetAllClient())
 }
 
-func FillDataPrestamo(listPrestamo []models.Prestamo, listClient []models.Client) []models.PrestamoTable {
-	var listPrestamoTable []models.PrestamoTable
+func FillDataLoan(listLoan []models.Loan, listClient []models.Client) []models.LoanTable {
+	var listLoanTable []models.LoanTable
 	for _, client := range listClient {
-		for _, prestamo := range listPrestamo {
-			if prestamo.ClientId == client.ID {
-				prestamoTable := &models.PrestamoTable{
-					ID:             prestamo.ID,
-					PrestamoNumber: prestamo.PrestamoNumber,
-					Amount:         prestamo.Amount,
-					Interest:       prestamo.Interest,
-					Cuota:          prestamo.Cuota,
-					Date:           prestamo.Date,
-					ClientId:       prestamo.ClientId,
-					ClientName:     client.Name + " " + client.Last_Name,
+		for _, loan := range listLoan {
+			if loan.ClientId == client.ID {
+				loanTable := &models.LoanTable{
+					ID:         loan.ID,
+					LoanNumber: loan.LoanNumber,
+					Amount:     loan.Amount,
+					Interest:   loan.Interest,
+					Quota:      loan.Quota,
+					Date:       loan.Date,
+					ClientId:   loan.ClientId,
+					ClientName: client.Name + " " + client.Last_Name,
 				}
-				listPrestamoTable = append(listPrestamoTable, *prestamoTable)
+				listLoanTable = append(listLoanTable, *loanTable)
 			}
 		}
 	}
 
-	sort.Slice(listPrestamoTable, func(i, j int) bool { return listPrestamoTable[i].Date < listPrestamoTable[j].Date })
-	return listPrestamoTable
+	sort.Slice(listLoanTable, func(i, j int) bool { return listLoanTable[i].Date < listLoanTable[j].Date })
+	return listLoanTable
 }
 
-func FillQuote(quotas json.Number) []models.CheckPay {
+func FillQuote(quotas string) []models.CheckPay {
 	listCheckPay := []models.CheckPay{}
-
-	c, err := quotas.Int64()
-
-	if err != nil {
-		fmt.Println(err)
-	}
 
 	var count int64 = 0
 
-	for range c {
+	for range quotas {
 		count += 1
 		checkPay := models.CheckPay{
-			QuotaNumber: json.Number(fmt.Sprintf("%d", count)),
+			QuotaNumber: fmt.Sprint(count),
 			Pay:         false,
 		}
 		listCheckPay = append(listCheckPay, checkPay)
@@ -172,23 +166,23 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 		return nil
 	}
 
-	recordsPrestamos, err := driver.ReadAll("prestamos")
+	recordsLoans, err := driver.ReadAll("loans")
 	if err != nil {
 		return client
 	}
 
-	for _, r := range recordsPrestamos {
-		p := &models.Prestamo{}
+	for _, r := range recordsLoans {
+		p := &models.Loan{}
 		err := json.Unmarshal([]byte(r), p)
 		if err != nil {
 			fmt.Println(err)
 		}
 		if ID == p.ClientId {
-			client.Prestamos = append(client.Prestamos, models.PrestamoToPopUpClient{
+			client.Loans = append(client.Loans, models.LoanToPopUpClient{
 				ID:             p.ID,
 				Amount:         p.Amount,
 				Interest:       p.Interest,
-				Cuota:          p.Cuota,
+				Quota:          p.Quota,
 				Date:           p.Date,
 				TotalAmount:    p.TotalAmount,
 				AmountForQuota: p.AmountForQuota,
@@ -200,28 +194,28 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 	return client
 }
 
-func (a *App) GetPrestamo(ID string) *models.Prestamo {
+func (a *App) GetLoan(ID string) *models.Loan {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		panic(err)
 	}
 
-	prestamo := &models.Prestamo{}
+	loan := &models.Loan{}
 
-	if err = driver.Read("prestamos", ID, prestamo); err != nil {
+	if err = driver.Read("loans", ID, loan); err != nil {
 		return nil
 	}
 
-	return prestamo
+	return loan
 }
 
-func (a *App) UpdatePrestamo(prestamo models.Prestamo) {
+func (a *App) UpdateLoan(loan models.Loan) {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		panic(err)
 	}
 
-	if err = driver.Write("prestamos", prestamo.ID, prestamo); err != nil {
+	if err = driver.Write("loans", loan.ID, loan); err != nil {
 		panic(err)
 	}
 }
