@@ -2,7 +2,7 @@ import { models } from "../../wailsjs/go/models";
 import { capitalize } from "./utils";
 
 export const popUpClientInfo = (client: models.ClientPopUp) => {
-  const { AmountPaid, AmountToPay } = calculateAmount(client.Prestamos);
+  const { AmountPaid, AmountToPay } = calculateAmount(client.Loans);
 
   return `<body class="popUp">
   <section>
@@ -24,7 +24,7 @@ export const popUpClientInfo = (client: models.ClientPopUp) => {
       </div>
       <div>
         <p>Información Prestamos:</p>
-        <p>Cantidad de Prestamos: ${client.PrestamoAmount}</p>
+        <p>Cantidad de Prestamos: ${client.LoanAmount}</p>
         <p>Cantidad de Monto a pagar: ${AmountToPay}</p>
         <p>Cantidad de Monto pagado: ${AmountPaid}</p>
       </div>
@@ -40,14 +40,14 @@ export const popUpClientInfo = (client: models.ClientPopUp) => {
           </thead>
           <tbody id="tbodyPrestamo">
           ${
-            client.Prestamos?.map((prestamo) => {
+            client.Loans?.map((loan) => {
               return `<tr>
-              <td>${prestamo.Amount}</td>
-              <td>${prestamo.Interest}</td>
-              <td>${new Date(prestamo.Date).toLocaleDateString("es-ES")}</td>
-              <td>${prestamo.Cuota}</td>
+              <td>${loan.Amount}</td>
+              <td>${loan.Interest}</td>
+              <td>${new Date(loan.Date).toLocaleDateString("es-ES")}</td>
+              <td>${loan.Quota}</td>
               <td><button class="infoPrestamo" id="${
-                prestamo.ID + "." + client.Name + " " + client.Last_Name
+                loan.ID + "." + client.Name + " " + client.Last_Name
               }">&#128269</button></td>
             </tr>`;
             }) || ""
@@ -60,13 +60,13 @@ export const popUpClientInfo = (client: models.ClientPopUp) => {
 </body>`;
 };
 
-const calculateAmount = (listPrestamo: models.PrestamoToPopUpClient[]) => {
+const calculateAmount = (listLoan: models.LoanToPopUpClient[]) => {
   let AmountToPay = 0;
   let AmountPaid = 0;
 
-  listPrestamo?.map((prestamo) => {
-    AmountToPay += Number(prestamo.TotalAmount) - Number(prestamo.AmountPaid);
-    AmountPaid += Number(prestamo.AmountPaid);
+  listLoan?.map((loan) => {
+    AmountToPay += Number(loan.TotalAmount) - Number(loan.AmountPaid);
+    AmountPaid += Number(loan.AmountPaid);
   });
   return { AmountPaid, AmountToPay };
 };

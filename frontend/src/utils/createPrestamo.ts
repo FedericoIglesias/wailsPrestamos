@@ -1,4 +1,4 @@
-import { GetAllClient, SavePrestamo } from "../../wailsjs/go/main/App.js";
+import { GetAllClient, SaveLoan } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 const $ = (id: string) => document.getElementById(id);
 const $$ = (name: string) => document.querySelector(name);
@@ -13,12 +13,12 @@ const listClient = GetAllClient().then((data) => data);
 
 const createPrestamo = () => {
   const totalAmount = calculatePrestamo().toPay;
-  const prestamo: models.PrestamoBrought = {
+  const prestamo: models.LoanBrought = {
     ID: "P" + new Date().getTime().toString(),
-    PrestamoNumber: inputPrestmoNumber.value,
+    LoanNumber: inputPrestmoNumber.value,
     Amount: inputAmount.value,
     Interest: inputInterest.value,
-    Cuota: inputCuota.value,
+    Quota: inputCuota.value,
     Date: new Date(inputDate.value).getTime().toString(),
     ClientId: selectClient.value,
     AmountForQuota: Math.floor(
@@ -26,7 +26,7 @@ const createPrestamo = () => {
     ).toString(),
     TotalAmount: totalAmount.toString(),
   };
-  SavePrestamo(prestamo);
+  SaveLoan(prestamo);
 
   inputAmount.value = "";
   inputInterest.value = "";

@@ -2,7 +2,7 @@ import { models } from "../../wailsjs/go/models";
 import { capitalize } from "./utils";
 
 export const PopUpPrestamoInfo = (
-  prestamo: models.Prestamo,
+  prestamo: models.Loan,
   client: string
 ) => {
   return `<body class="popUp">
@@ -17,7 +17,7 @@ export const PopUpPrestamoInfo = (
       <p>Monto: ${prestamo.Amount}</p>
       <p>Intereses: ${prestamo.Interest}</p>
       <p>Fecha: ${new Date(prestamo.Date).toLocaleDateString("es-ES")}</p>
-      <p>Cuotas: ${prestamo.Cuota}</p>
+      <p>Cuotas: ${prestamo.Quota}</p>
     </div>
     <div>
       <table>

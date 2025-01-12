@@ -1,7 +1,7 @@
 import {
-  GetAllPrestamoTable,
-  GetPrestamo,
-  UpdatePrestamo,
+  GetAllLoanTable,
+  GetLoan,
+  UpdateLoan,
 } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
@@ -9,17 +9,17 @@ import { capitalize, checkLong } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyPrestamo = $("tbodyPrestamo");
 const body = document.getElementsByTagName("body");
-const listPrestamoPlus = GetAllPrestamoTable().then((data) => data || []);
+const listPrestamoPlus = GetAllLoanTable().then((data) => data || []);
 
-const createRowPrestamo = (prestamo: models.PrestamoTable) => {
+const createRowPrestamo = (prestamo: models.LoanTable) => {
   const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
   return `<tr>
   <td>${checkLong(capitalize(prestamo.ClientName))}</td>
-  <td>${checkLong(prestamo.PrestamoNumber)}</td>
+  <td>${checkLong(prestamo.LoanNumber)}</td>
   <td>${checkLong(prestamo.Amount)}</td>
   <td>${checkLong(prestamo.Interest)}</td>
   <td>${checkLong(date)}</td>
-  <td>${checkLong(prestamo.Cuota)}</td>
+  <td>${checkLong(prestamo.Quota)}</td>
   <td><button class="infoPrestamo" id="${
     prestamo.ID + "." + prestamo.ClientName
   }">&#128269</button></td>
@@ -32,7 +32,7 @@ export const initTablePrestamo = async () => {
       tbodyPrestamo.removeChild(tbodyPrestamo.firstChild);
     }
     if (listPrestamoPlus)
-      (await listPrestamoPlus).map((Prestamo: models.PrestamoTable) => {
+      (await listPrestamoPlus).map((Prestamo: models.LoanTable) => {
         const row = createRowPrestamo(Prestamo);
         tbodyPrestamo.appendChild(document.createElement("tr")).innerHTML = row;
       });
@@ -46,7 +46,7 @@ export const detailsPrestamos = () => {
   if (rows.length)
     for (const row of rows) {
       row.addEventListener("click", async () => {
-        const prestamo = await GetPrestamo(row.id.split(".")[0]);
+        const prestamo = await GetLoan(row.id.split(".")[0]);
         const section = document.createElement("body");
         section.className = "popUp";
         section.innerHTML = PopUpPrestamoInfo(prestamo, row.id.split(".")[1]);
@@ -63,7 +63,7 @@ export const detailsPrestamos = () => {
     }
 };
 
-export const savePrestamo = (prestamo: models.Prestamo) => {
+export const savePrestamo = (prestamo: models.Loan) => {
   const listInput = Array.from(
     document.getElementsByTagName("input") as HTMLCollectionOf<HTMLInputElement>
   );
@@ -79,5 +79,5 @@ export const savePrestamo = (prestamo: models.Prestamo) => {
     }
   }
   prestamo.CheckPay = listCheckPay;
-  UpdatePrestamo(prestamo);
+  UpdateLoan(prestamo);
 };

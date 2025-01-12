@@ -48,28 +48,28 @@ export namespace models {
 	        this.JobPlace = source["JobPlace"];
 	    }
 	}
-	export class PrestamoToPopUpClient {
+	export class LoanToPopUpClient {
 	    ID: string;
-	    PrestamoNumber: string;
+	    LoanNumber: string;
 	    Amount: string;
 	    Interest: string;
-	    Cuota: string;
+	    Quota: string;
 	    Date: string;
 	    TotalAmount: string;
 	    AmountForQuota: string;
 	    AmountPaid: string;
 	
 	    static createFrom(source: any = {}) {
-	        return new PrestamoToPopUpClient(source);
+	        return new LoanToPopUpClient(source);
 	    }
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
-	        this.PrestamoNumber = source["PrestamoNumber"];
+	        this.LoanNumber = source["LoanNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
-	        this.Cuota = source["Cuota"];
+	        this.Quota = source["Quota"];
 	        this.Date = source["Date"];
 	        this.TotalAmount = source["TotalAmount"];
 	        this.AmountForQuota = source["AmountForQuota"];
@@ -86,10 +86,10 @@ export namespace models {
 	    CUIL: string;
 	    Empresa: string;
 	    Job: string;
-	    PrestamoAmount: string;
+	    LoanAmount: string;
 	    AmountDue: string;
 	    AmountPaid: string;
-	    Prestamos: PrestamoToPopUpClient[];
+	    Loans: LoanToPopUpClient[];
 	
 	    static createFrom(source: any = {}) {
 	        return new ClientPopUp(source);
@@ -106,10 +106,10 @@ export namespace models {
 	        this.CUIL = source["CUIL"];
 	        this.Empresa = source["Empresa"];
 	        this.Job = source["Job"];
-	        this.PrestamoAmount = source["PrestamoAmount"];
+	        this.LoanAmount = source["LoanAmount"];
 	        this.AmountDue = source["AmountDue"];
 	        this.AmountPaid = source["AmountPaid"];
-	        this.Prestamos = this.convertValues(source["Prestamos"], PrestamoToPopUpClient);
+	        this.Loans = this.convertValues(source["Loans"], LoanToPopUpClient);
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
@@ -130,12 +130,12 @@ export namespace models {
 		    return a;
 		}
 	}
-	export class Prestamo {
+	export class Loan {
 	    ID: string;
-	    PrestamoNumber: string;
+	    LoanNumber: string;
 	    Amount: string;
 	    Interest: string;
-	    Cuota: string;
+	    Quota: string;
 	    Date: string;
 	    ClientId: string;
 	    TotalAmount: string;
@@ -144,16 +144,16 @@ export namespace models {
 	    CheckPay: CheckPay[];
 	
 	    static createFrom(source: any = {}) {
-	        return new Prestamo(source);
+	        return new Loan(source);
 	    }
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
-	        this.PrestamoNumber = source["PrestamoNumber"];
+	        this.LoanNumber = source["LoanNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
-	        this.Cuota = source["Cuota"];
+	        this.Quota = source["Quota"];
 	        this.Date = source["Date"];
 	        this.ClientId = source["ClientId"];
 	        this.TotalAmount = source["TotalAmount"];
@@ -180,55 +180,55 @@ export namespace models {
 		    return a;
 		}
 	}
-	export class PrestamoBrought {
+	export class LoanBrought {
 	    ID: string;
-	    PrestamoNumber: string;
+	    LoanNumber: string;
 	    Amount: string;
 	    Interest: string;
-	    Cuota: string;
+	    Quota: string;
 	    Date: string;
 	    TotalAmount: string;
 	    AmountForQuota: string;
 	    ClientId: string;
 	
 	    static createFrom(source: any = {}) {
-	        return new PrestamoBrought(source);
+	        return new LoanBrought(source);
 	    }
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
-	        this.PrestamoNumber = source["PrestamoNumber"];
+	        this.LoanNumber = source["LoanNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
-	        this.Cuota = source["Cuota"];
+	        this.Quota = source["Quota"];
 	        this.Date = source["Date"];
 	        this.TotalAmount = source["TotalAmount"];
 	        this.AmountForQuota = source["AmountForQuota"];
 	        this.ClientId = source["ClientId"];
 	    }
 	}
-	export class PrestamoTable {
+	export class LoanTable {
 	    ID: string;
-	    PrestamoNumber: string;
+	    LoanNumber: string;
 	    Amount: string;
 	    Interest: string;
-	    Cuota: string;
+	    Quota: string;
 	    Date: string;
 	    ClientId: string;
 	    ClientName: string;
 	
 	    static createFrom(source: any = {}) {
-	        return new PrestamoTable(source);
+	        return new LoanTable(source);
 	    }
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.ID = source["ID"];
-	        this.PrestamoNumber = source["PrestamoNumber"];
+	        this.LoanNumber = source["LoanNumber"];
 	        this.Amount = source["Amount"];
 	        this.Interest = source["Interest"];
-	        this.Cuota = source["Cuota"];
+	        this.Quota = source["Quota"];
 	        this.Date = source["Date"];
 	        this.ClientId = source["ClientId"];
 	        this.ClientName = source["ClientName"];

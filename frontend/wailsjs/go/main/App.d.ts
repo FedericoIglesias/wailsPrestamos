@@ -4,14 +4,14 @@ import {models} from '../models';
 
 export function GetAllClient():Promise<Array<models.Client>>;
 
-export function GetAllPrestamoTable():Promise<Array<models.PrestamoTable>>;
+export function GetAllLoanTable():Promise<Array<models.LoanTable>>;
 
 export function GetClientPopUp(arg1:string):Promise<models.ClientPopUp>;
 
-export function GetPrestamo(arg1:string):Promise<models.Prestamo>;
+export function GetLoan(arg1:string):Promise<models.Loan>;
 
 export function SaveClient(arg1:models.Client):Promise<void>;
 
-export function SavePrestamo(arg1:models.PrestamoBrought):Promise<void>;
+export function SaveLoan(arg1:models.LoanBrought):Promise<void>;
 
-export function UpdatePrestamo(arg1:models.Prestamo):Promise<void>;
+export function UpdateLoan(arg1:models.Loan):Promise<void>;

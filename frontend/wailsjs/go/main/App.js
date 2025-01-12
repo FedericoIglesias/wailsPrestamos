@@ -6,26 +6,26 @@ export function GetAllClient() {
   return window['go']['main']['App']['GetAllClient']();
 }
 
-export function GetAllPrestamoTable() {
-  return window['go']['main']['App']['GetAllPrestamoTable']();
+export function GetAllLoanTable() {
+  return window['go']['main']['App']['GetAllLoanTable']();
 }
 
 export function GetClientPopUp(arg1) {
   return window['go']['main']['App']['GetClientPopUp'](arg1);
 }
 
-export function GetPrestamo(arg1) {
-  return window['go']['main']['App']['GetPrestamo'](arg1);
+export function GetLoan(arg1) {
+  return window['go']['main']['App']['GetLoan'](arg1);
 }
 
 export function SaveClient(arg1) {
   return window['go']['main']['App']['SaveClient'](arg1);
 }
 
-export function SavePrestamo(arg1) {
-  return window['go']['main']['App']['SavePrestamo'](arg1);
+export function SaveLoan(arg1) {
+  return window['go']['main']['App']['SaveLoan'](arg1);
 }
 
-export function UpdatePrestamo(arg1) {
-  return window['go']['main']['App']['UpdatePrestamo'](arg1);
+export function UpdateLoan(arg1) {
+  return window['go']['main']['App']['UpdateLoan'](arg1);
 }
