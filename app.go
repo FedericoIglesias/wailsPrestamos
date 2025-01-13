@@ -142,7 +142,11 @@ func FillDataLoan(listLoan []models.Loan, listClient []models.Client) []models.L
 func FillQuote(quotas, date string) []models.CheckPay {
 	listCheckPay := []models.CheckPay{}
 
-	var count int = 0
+	c, err := strconv.Atoi(quotas)
+
+	if err != nil {
+		panic(err)
+	}
 
 	initDate, err := strconv.Atoi(date)
 
@@ -152,11 +156,10 @@ func FillQuote(quotas, date string) []models.CheckPay {
 		panic(err)
 	}
 
-	for range quotas {
-		count += 1
-		DatePay := dateUnix.AddDate(0, count, 0).UnixMilli()
+	for value := range c {
+		DatePay := dateUnix.AddDate(0, value+1, 0).UnixMilli()
 		checkPay := models.CheckPay{
-			QuotaNumber: fmt.Sprint(count),
+			QuotaNumber: fmt.Sprint(value + 1),
 			DatePay:     fmt.Sprint(DatePay),
 			Pay:         false,
 		}
