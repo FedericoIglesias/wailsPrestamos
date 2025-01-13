@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"prestamos/internal/models"
 	"sort"
+	"strconv"
+	"time"
 
 	"github.com/FedericoIglesias/local_db"
 )
@@ -65,7 +67,7 @@ func (a *App) SaveLoan(loan models.LoanBrought) {
 		panic(err)
 	}
 
-	listCheckPay := FillQuote(loan.Quota)
+	listCheckPay := FillQuote(loan.Quota, loan.Date)
 
 	err = driver.Write("loans", loan.ID, &models.Loan{
 		ID:             loan.ID,
@@ -137,15 +139,25 @@ func FillDataLoan(listLoan []models.Loan, listClient []models.Client) []models.L
 	return listLoanTable
 }
 
-func FillQuote(quotas string) []models.CheckPay {
+func FillQuote(quotas, date string) []models.CheckPay {
 	listCheckPay := []models.CheckPay{}
 
-	var count int64 = 0
+	var count int = 0
+
+	initDate, err := strconv.Atoi(date)
+
+	dateUnix := time.UnixMilli(int64(initDate))
+
+	if err != nil {
+		panic(err)
+	}
 
 	for range quotas {
 		count += 1
+		DatePay := dateUnix.AddDate(0, count, 0).UnixMilli()
 		checkPay := models.CheckPay{
 			QuotaNumber: fmt.Sprint(count),
+			DatePay:     fmt.Sprint(DatePay),
 			Pay:         false,
 		}
 		listCheckPay = append(listCheckPay, checkPay)
