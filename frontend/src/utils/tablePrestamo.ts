@@ -12,7 +12,7 @@ const body = document.getElementsByTagName("body");
 const listPrestamoPlus = GetAllLoanTable().then((data) => data || []);
 
 const createRowPrestamo = (prestamo: models.LoanTable) => {
-  const date = new Date(prestamo.Date).toLocaleDateString("es-ES");
+  const date = new Date(Number(prestamo.Date)).toLocaleDateString("es-ES");
   return `<tr>
   <td>${checkLong(capitalize(prestamo.ClientName))}</td>
   <td>${checkLong(prestamo.LoanNumber)}</td>
