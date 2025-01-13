@@ -1,10 +1,7 @@
 import { models } from "../../wailsjs/go/models";
 import { capitalize } from "./utils";
 
-export const PopUpPrestamoInfo = (
-  prestamo: models.Loan,
-  client: string
-) => {
+export const PopUpPrestamoInfo = (prestamo: models.Loan, client: string) => {
   return `<body class="popUp">
   <section>
   <header>
@@ -24,6 +21,7 @@ export const PopUpPrestamoInfo = (
         <thead>
           <tr>
             <th>Cuota N°</th>
+            <th>Fecha</th>
             <th>Pagado</th>
           </tr>
         </thead>
@@ -43,11 +41,17 @@ const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
   let text = "";
   if (!listCheckPay) return "";
   for (let i = 0; i < listCheckPay.length; ++i) {
-    text += `<tr><td>${
-      listCheckPay[i].QuotaNumber
-    }</td><td style="text-aling:center"><input type="checkbox" ${
+    text += `<tr><td>${listCheckPay[i].QuotaNumber}</td>
+    <td>${formatDate(listCheckPay[i].DatePay)}</td>
+    <td style="text-aling:center"><input type="checkbox" ${
       listCheckPay[i].Pay ? `checked="checked"` : null
     } id="checked${i}" ></td></tr>`;
   }
   return text;
+};
+
+const formatDate = (date: string) => {
+  const month = new Date(Number(date)).getMonth() + 1 ;
+  const year = new Date(Number(date)).getFullYear();
+  return month +"/" + year;
 };
