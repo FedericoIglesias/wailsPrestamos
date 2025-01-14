@@ -1,8 +1,4 @@
-import {
-  GetAllLoanTable,
-  GetLoan,
-  UpdateLoan,
-} from "../../wailsjs/go/main/App.js";
+import { GetAllLoanTable, GetLoan, UpdateLoan } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
 import { capitalize, checkLong } from "./utils.js";
@@ -64,20 +60,24 @@ export const detailsPrestamos = () => {
 };
 
 export const savePrestamo = (prestamo: models.Loan) => {
-  const listInput = Array.from(
-    document.getElementsByTagName("input") as HTMLCollectionOf<HTMLInputElement>
-  );
+  const listRow = Array.from(document.querySelectorAll("#miniLoanTable"));
   const listCheckPay: models.CheckPay[] = [];
-  for (let input of listInput) {
-    if (input.id.includes("checked")) {
-      const value = ($(input.id) as HTMLInputElement)?.checked;
-      const checPay: models.CheckPay = {
-        QuotaNumber: input.id.split("checked")[1],
-        DatePay: "",
-        Pay: value,
-      };
-      listCheckPay.push(checPay);
+
+  for (let row of listRow) {
+    const pay = (row.lastChild?.firstChild as HTMLInputElement).checked;
+    const stringDate = (row.childNodes[1] as HTMLTableCellElement).nextSibling
+      ?.firstChild?.nodeValue;
+      let date 
+    if (stringDate) {
+      date = new Date("01/"+stringDate).getTime()
     }
+    const checPay: models.CheckPay = {
+      QuotaNumber: (row.firstChild as HTMLTableCellElement).innerText,
+      DatePay: date?.toString() || "",
+      Pay: pay,
+    };
+    console.log(checPay)
+    listCheckPay.push(checPay);
   }
   prestamo.CheckPay = listCheckPay;
   UpdateLoan(prestamo);

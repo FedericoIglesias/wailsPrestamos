@@ -41,7 +41,7 @@ const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
   let text = "";
   if (!listCheckPay) return "";
   for (let i = 0; i < listCheckPay.length; ++i) {
-    text += `<tr><td>${listCheckPay[i].QuotaNumber}</td>
+    text += `<tr id="miniLoanTable"><td>${listCheckPay[i].QuotaNumber}</td>
     <td>${formatDate(listCheckPay[i].DatePay)}</td>
     <td style="text-aling:center"><input type="checkbox" ${
       listCheckPay[i].Pay ? `checked="checked"` : null
