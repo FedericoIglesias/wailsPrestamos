@@ -40,17 +40,7 @@ export const popUpClientInfo = (client: models.ClientPopUp) => {
           </thead>
           <tbody id="tbodyPrestamo">
           ${
-            client.Loans?.map((loan) => {
-              return `<tr>
-              <td>${loan.Amount}</td>
-              <td>${loan.Interest}</td>
-              <td>${new Date(loan.Date).toLocaleDateString("es-ES")}</td>
-              <td>${loan.Quota}</td>
-              <td><button class="infoPrestamo" id="${
-                loan.ID + "." + client.Name + " " + client.Last_Name
-              }">&#128269</button></td>
-            </tr>`;
-            }) || ""
+            printTableLoan(client)
           }
           </tbody>
         </table>
@@ -69,4 +59,20 @@ const calculateAmount = (listLoan: models.LoanToPopUpClient[]) => {
     AmountPaid += Number(loan.AmountPaid);
   });
   return { AmountPaid, AmountToPay };
+};
+
+const printTableLoan = (client: models.ClientPopUp) => {
+  let text = "";
+  for (let loan of client.Loans) {
+    text += `<tr>
+              <td>${loan.Amount}</td>
+              <td>${loan.Interest}</td>
+              <td>${new Date(Number(loan.Date)).toLocaleDateString("es-ES")}</td>
+              <td>${loan.Quota}</td>
+              <td><button class="infoPrestamo" id="${
+                loan.ID + "." + client.Name + " " + client.Last_Name
+              }">&#128269</button></td>
+            </tr>`;
+  }
+  return text;
 };
