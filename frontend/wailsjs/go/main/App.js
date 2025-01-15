@@ -18,6 +18,10 @@ export function GetLoan(arg1) {
   return window['go']['main']['App']['GetLoan'](arg1);
 }
 
+export function GetQuotaForMonth(arg1) {
+  return window['go']['main']['App']['GetQuotaForMonth'](arg1);
+}
+
 export function SaveClient(arg1) {
   return window['go']['main']['App']['SaveClient'](arg1);
 }

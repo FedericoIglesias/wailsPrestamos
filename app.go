@@ -234,3 +234,45 @@ func (a *App) UpdateLoan(loan models.Loan) {
 		panic(err)
 	}
 }
+
+func (a *App) GetQuotasForMonth(date string) ([]models.CheckPayAndClient, error) {
+	driver, err := local_db.New("./db", nil)
+	if err != nil {
+		panic(err)
+	}
+
+	loansRecords, err := driver.ReadAll("loans")
+	if err != nil {
+		return nil, err
+	}
+
+	listCheckPay := []models.CheckPayAndClient{}
+
+	for _, r := range loansRecords {
+		p := &models.Loan{}
+		err := json.Unmarshal([]byte(r), p)
+		if err != nil {
+			fmt.Println(err)
+		}
+		for _, checkPay := range p.CheckPay {
+			if date == checkPay.DatePay {
+				client := &models.Client{}
+				err := driver.Read("clients", p.ClientId, client)
+				if err != nil {
+					return nil, err
+				}
+				listCheckPay = append(listCheckPay, models.CheckPayAndClient{
+					QuotaNumber: checkPay.QuotaNumber,
+					DatePay:     checkPay.DatePay,
+					Pay:         checkPay.Pay,
+					ClientId:    p.ClientId,
+					ClientName:  client.Name + " " + client.Last_Name,
+					DNI:         client.DNI,
+				})
+				break
+			}
+		}
+	}
+
+	return listCheckPay, nil
+}
