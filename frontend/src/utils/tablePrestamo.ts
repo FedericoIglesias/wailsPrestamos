@@ -68,7 +68,6 @@ export const detailsPrestamos = () => {
 export const savePrestamo = (prestamo: models.Loan) => {
   const listRow = Array.from(document.querySelectorAll("#miniLoanTable"));
   const listCheckPay: models.CheckPay[] = [];
-  console.log(listRow);
   for (let row of listRow) {
     const pay = (row.children[2].firstChild as HTMLInputElement).checked;
     const date = row.children[1].firstChild?.nodeValue?.split("/");

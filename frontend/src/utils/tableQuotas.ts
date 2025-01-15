@@ -1,8 +1,23 @@
-import { $$ } from "../main";
+import { GetQuotasForMonth } from "../../wailsjs/go/main/App";
+import { models } from "../../wailsjs/go/models";
+
+const $$ = (name: string) => document.querySelector(name);
 
 const sectionTableQuotas = $$(".table-quotas") as HTMLDivElement;
 const section = document.createElement("section");
-section.innerHTML = `  <div>
+
+const initTbodyQuotas = (checkPay: models.CheckPayAndClient) => {
+  return `
+  <tr>
+    <td>${checkPay.ClientName}</td>
+    <td>${checkPay.DNI}</td>
+    <td>${checkPay.QuotaNumber}</td>
+    <td>${checkPay.Pay}</td>
+    </tr>
+  `;
+};
+
+section.innerHTML = `<div id="setGetQuotas">
   <label for="">Mes</label>
   <select name="" id="">
     <option>01</option>
@@ -20,9 +35,9 @@ section.innerHTML = `  <div>
   </select>
   <label for="">Año</label>
   <input type="number">
-  <button>Enviar</button>
+  <button id="getQuotas">Enviar</button>
 </div>
-<table>
+<table class="table">
   <thead>
     <tr>
         <th>Cliente</th>
@@ -33,8 +48,17 @@ section.innerHTML = `  <div>
     </tr>
 </thead>
 <tbody id="tbodyQuotas">
+${"initTbodyQuotas()"}
 </tbody>
 </table>`;
 export const initTableQuotas = () => {
   sectionTableQuotas.appendChild(section);
+  document.getElementById("getQuotas")?.addEventListener("click", async () => {
+    const div = document.getElementById("setGetQuotas");
+    const month = (div?.children[1] as HTMLSelectElement).value;
+    const year = (div?.children[3] as HTMLInputElement).value;
+    const date = new Date("01/" + month + "/" + year).getTime();
+    const listQuotas = await GetQuotasForMonth(date.toString());
+    console.log(listQuotas);
+  });
 };
