@@ -2,6 +2,7 @@ import {
   GetAllLoanTable,
   GetLoan,
   UpdateLoan,
+  
 } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
@@ -76,11 +77,13 @@ export const savePrestamo = (prestamo: models.Loan) => {
     newDate.setFullYear(Number(date[1]));
     newDate.setMonth(Number(date[0]) - 1);
     newDate.setDate(1);
+    newDate.setHours(0, 0, 0, 0);
     const checPay: models.CheckPay = {
       QuotaNumber: row.children[0].firstChild?.nodeValue || "",
       DatePay: newDate.getTime()?.toString() || "",
       Pay: pay,
     };
+    console.log(checPay);
     listCheckPay.push(checPay);
   }
   prestamo.CheckPay = listCheckPay;
