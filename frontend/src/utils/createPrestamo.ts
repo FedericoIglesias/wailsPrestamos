@@ -9,7 +9,6 @@ const inputPrestmoNumber = $("inputPrestmoNumber") as HTMLInputElement;
 const inputDate = $("inputDate") as HTMLInputElement;
 const selectClient = $("selectClient") as HTMLSelectElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
-const listClient = GetAllClient().then((data) => data);
 
 const createPrestamo = () => {
   const totalAmount = calculatePrestamo().toPay;
@@ -82,6 +81,9 @@ export const fillSelectClient = async () => {
   while (selectClient.firstChild) {
     selectClient.removeChild(selectClient.firstChild);
   }
+  const listClient = GetAllClient().then((data) => {
+    return data;
+  });
   selectClient.add(document.createElement("option"));
   (await listClient).map((client: models.Client) => {
     let option: HTMLOptionElement = document.createElement("option");

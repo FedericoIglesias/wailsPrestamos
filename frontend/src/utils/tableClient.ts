@@ -5,7 +5,6 @@ import { detailsPrestamos } from "./tablePrestamo.js";
 import { capitalize, checkLong } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyClient = $("tbodyClient");
-const listClient = GetAllClient().then((data) => data);
 const body = document.getElementsByTagName("body");
 
 const createRowClient = (Client: models.Client) => {
@@ -26,6 +25,9 @@ export const InitTableClient = async () => {
     while (tbodyClient.firstChild) {
       tbodyClient.removeChild(tbodyClient.firstChild);
     }
+    const listClient = GetAllClient().then((data) => {
+      return data;
+    });
     (await listClient).map((client: models.Client) => {
       const row = createRowClient(client);
       tbodyClient.appendChild(document.createElement("tr")).innerHTML = row;

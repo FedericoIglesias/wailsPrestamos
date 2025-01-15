@@ -9,7 +9,6 @@ import { capitalize, checkLong } from "./utils.js";
 const $ = (id: string) => document.getElementById(id);
 const tbodyPrestamo = $("tbodyPrestamo");
 const body = document.getElementsByTagName("body");
-const listPrestamoPlus = GetAllLoanTable().then((data) => data || []);
 
 const createRowPrestamo = (prestamo: models.LoanTable) => {
   const date = new Date(Number(prestamo.Date)).toLocaleDateString("es-ES");
@@ -31,6 +30,9 @@ export const initTablePrestamo = async () => {
     while (tbodyPrestamo.firstChild) {
       tbodyPrestamo.removeChild(tbodyPrestamo.firstChild);
     }
+    const listPrestamoPlus = GetAllLoanTable().then((data) => {
+      return data || [];
+    });
     if (listPrestamoPlus)
       (await listPrestamoPlus).map((Prestamo: models.LoanTable) => {
         const row = createRowPrestamo(Prestamo);
