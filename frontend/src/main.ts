@@ -91,9 +91,3 @@ sectionAddClient.addEventListener("keypress", (e) => {
     checkClient();
   }
 });
-
-async function test() {
-  const list = await GetQuotasForMonth("1739577600000");
-  console.log(list);
-}
-test();

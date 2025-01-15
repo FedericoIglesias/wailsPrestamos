@@ -150,11 +150,13 @@ func FillQuote(quotas, date string) []models.CheckPay {
 
 	initDate, err := strconv.Atoi(date)
 
-	dateUnix := time.UnixMilli(int64(initDate))
-
 	if err != nil {
 		panic(err)
 	}
+
+	dateUnix := time.UnixMilli(int64(initDate))
+
+	dateUnix = time.Date(dateUnix.Year(), dateUnix.Month(), 1, 0, 0, 0, 0, dateUnix.Location())
 
 	for value := range c {
 		DatePay := dateUnix.AddDate(0, value+1, 0).UnixMilli()

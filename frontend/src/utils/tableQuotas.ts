@@ -6,15 +6,18 @@ const $$ = (name: string) => document.querySelector(name);
 const sectionTableQuotas = $$(".table-quotas") as HTMLDivElement;
 const section = document.createElement("section");
 
-const initTbodyQuotas = (checkPay: models.CheckPayAndClient) => {
-  return `
-  <tr>
-    <td>${checkPay.ClientName}</td>
+export const initTbodyQuotas = (listCheckPay: models.CheckPayAndClient[]) => {
+  const tbodyQuotas = document.getElementById("tbodyQuotas");
+
+  listCheckPay.map((checkPay: models.CheckPayAndClient) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = ` <td>${checkPay.ClientName}</td>
     <td>${checkPay.DNI}</td>
     <td>${checkPay.QuotaNumber}</td>
     <td>${checkPay.Pay}</td>
-    </tr>
-  `;
+    `;
+    tbodyQuotas?.appendChild(tr);
+  });
 };
 
 section.innerHTML = `<div id="setGetQuotas">
@@ -41,14 +44,13 @@ section.innerHTML = `<div id="setGetQuotas">
   <thead>
     <tr>
         <th>Cliente</th>
-        <th> Cuota Número </th>
-        <th>Pago</th>
         <th>DNI</th>
+        <th>Cuota Número</th>
+        <th>Pago</th>
         <th>Valor Cuota</th>
     </tr>
 </thead>
 <tbody id="tbodyQuotas">
-${"initTbodyQuotas()"}
 </tbody>
 </table>`;
 export const initTableQuotas = () => {
@@ -57,8 +59,9 @@ export const initTableQuotas = () => {
     const div = document.getElementById("setGetQuotas");
     const month = (div?.children[1] as HTMLSelectElement).value;
     const year = (div?.children[3] as HTMLInputElement).value;
-    const date = new Date("01/" + month + "/" + year).getTime();
+    const date = new Date(month + "/01/" + year).getTime();
+
     const listQuotas = await GetQuotasForMonth(date.toString());
-    console.log(listQuotas);
+    initTbodyQuotas(listQuotas);
   });
 };
