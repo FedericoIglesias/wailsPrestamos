@@ -23,6 +23,7 @@ export namespace models {
 	    ClientId: string;
 	    ClientName: string;
 	    DNI: string;
+	    QuoteValue: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new CheckPayAndClient(source);
@@ -36,6 +37,7 @@ export namespace models {
 	        this.ClientId = source["ClientId"];
 	        this.ClientName = source["ClientName"];
 	        this.DNI = source["DNI"];
+	        this.QuoteValue = source["QuoteValue"];
 	    }
 	}
 	export class Client {

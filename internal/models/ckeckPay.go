@@ -13,4 +13,5 @@ type CheckPayAndClient struct {
 	ClientId    string
 	ClientName  string
 	DNI         string
+	QuoteValue  string
 }

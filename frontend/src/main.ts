@@ -1,4 +1,3 @@
-import { GetQuotasForMonth } from "../wailsjs/go/main/App.js";
 import { checkClient } from "./utils/createClient.js";
 import {
   calculatePrestamo,

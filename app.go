@@ -270,6 +270,7 @@ func (a *App) GetQuotasForMonth(date string) ([]models.CheckPayAndClient, error)
 					ClientId:    p.ClientId,
 					ClientName:  client.Name + " " + client.Last_Name,
 					DNI:         client.DNI,
+					QuoteValue:  p.AmountForQuota,
 				})
 				break
 			}

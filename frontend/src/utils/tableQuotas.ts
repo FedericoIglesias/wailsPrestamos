@@ -8,13 +8,16 @@ const section = document.createElement("section");
 
 export const initTbodyQuotas = (listCheckPay: models.CheckPayAndClient[]) => {
   const tbodyQuotas = document.getElementById("tbodyQuotas");
-
+  while (tbodyQuotas?.firstChild) {
+    tbodyQuotas.removeChild(tbodyQuotas.firstChild);
+  }
   listCheckPay.map((checkPay: models.CheckPayAndClient) => {
     const tr = document.createElement("tr");
     tr.innerHTML = ` <td>${checkPay.ClientName}</td>
     <td>${checkPay.DNI}</td>
     <td>${checkPay.QuotaNumber}</td>
     <td>${checkPay.Pay}</td>
+    <td>${checkPay.QuoteValue}</td>
     `;
     tbodyQuotas?.appendChild(tr);
   });
@@ -60,7 +63,6 @@ export const initTableQuotas = () => {
     const month = (div?.children[1] as HTMLSelectElement).value;
     const year = (div?.children[3] as HTMLInputElement).value;
     const date = new Date(month + "/01/" + year).getTime();
-
     const listQuotas = await GetQuotasForMonth(date.toString());
     initTbodyQuotas(listQuotas);
   });
