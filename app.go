@@ -24,11 +24,11 @@ func (a *App) SaveClient(Client models.Client) {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 	err = driver.Write("clients", Client.ID, Client)
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 }
@@ -37,7 +37,7 @@ func (a *App) GetAllClient() []models.Client {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	listClient := []models.Client{}
@@ -51,7 +51,7 @@ func (a *App) GetAllClient() []models.Client {
 	for _, client := range records {
 		c := &models.Client{}
 		if err := json.Unmarshal([]byte(client), &c); err != nil {
-			panic(err)
+			fmt.Printf("%s", err)
 		}
 		listClient = append(listClient, *c)
 	}
@@ -64,7 +64,7 @@ func (a *App) GetAllClient() []models.Client {
 func (a *App) SaveLoan(loan models.LoanBrought) {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	listCheckPay := FillQuote(loan.Quota, loan.Date)
@@ -93,7 +93,7 @@ func (a *App) GetAllLoanTable() []models.LoanTable {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	listLoan := []models.Loan{}
@@ -107,7 +107,7 @@ func (a *App) GetAllLoanTable() []models.LoanTable {
 	for _, loan := range records {
 		p := &models.Loan{}
 		if err := json.Unmarshal([]byte(loan), &p); err != nil {
-			panic(err)
+			fmt.Printf("%s", err)
 		}
 		listLoan = append(listLoan, *p)
 	}
@@ -145,13 +145,13 @@ func FillQuote(quotas, date string) []models.CheckPay {
 	c, err := strconv.Atoi(quotas)
 
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	initDate, err := strconv.Atoi(date)
 
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	dateUnix := time.UnixMilli(int64(initDate))
@@ -174,7 +174,7 @@ func FillQuote(quotas, date string) []models.CheckPay {
 func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	client := &models.ClientPopUp{}
@@ -214,7 +214,7 @@ func (a *App) GetClientPopUp(ID string) *models.ClientPopUp {
 func (a *App) GetLoan(ID string) *models.Loan {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	loan := &models.Loan{}
@@ -229,18 +229,18 @@ func (a *App) GetLoan(ID string) *models.Loan {
 func (a *App) UpdateLoan(loan models.Loan) {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	if err = driver.Write("loans", loan.ID, loan); err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 }
 
 func (a *App) GetQuotasForMonth(date string) ([]models.CheckPayAndClient, error) {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
-		panic(err)
+		fmt.Printf("%s", err)
 	}
 
 	loansRecords, err := driver.ReadAll("loans")
