@@ -41,17 +41,18 @@ const insertCheckPay = (listCheckPay: models.CheckPay[]) => {
   let text = "";
   if (!listCheckPay) return "";
   for (let i = 0; i < listCheckPay.length; ++i) {
-    text += `<tr id="miniLoanTable"><td>${listCheckPay[i].QuotaNumber}</td>
+    text += `<tr id="miniLoanTable">
+    <td>${listCheckPay[i].QuotaNumber}</td>
     <td>${formatDate(listCheckPay[i].DatePay)}</td>
     <td style="text-aling:center"><input type="checkbox" ${
       listCheckPay[i].Pay ? `checked="checked"` : null
-    } id="checked${i}" ></td></tr>`;
+    } id="checked${i}" ></td>
+    </tr>`;
   }
   return text;
 };
 
 const formatDate = (date: string) => {
-  const month = new Date(Number(date)).getMonth() + 1 ;
-  const year = new Date(Number(date)).getFullYear();
-  return month +"/" + year;
+  const newDate = new Date(Number(date));
+  return newDate.getMonth() + 1 + "/" + newDate.getFullYear();
 };
