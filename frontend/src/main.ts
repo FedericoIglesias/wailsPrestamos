@@ -1,3 +1,4 @@
+import { GetQuotasForMonth } from "../wailsjs/go/main/App.js";
 import { checkClient } from "./utils/createClient.js";
 import {
   calculatePrestamo,
@@ -7,12 +8,15 @@ import {
 } from "./utils/createPrestamo.js";
 import { InitTableClient } from "./utils/tableClient.js";
 import { initTablePrestamo } from "./utils/tablePrestamo.js";
+import { initTableQuotas } from "./utils/tableQuotas.js";
 export const $ = (id: string) => document.getElementById(id);
 export const $$ = (name: string) => document.querySelector(name);
 const addClient = $("add-client");
 const addPrestamo = $("add-prestamo");
 const tablePrestamo = $("table-prestamo");
 const tableClient = $("table-client");
+const tableQuotas = $("table-quotas");
+const sectionTableQuotas = $$(".table-quotas") as HTMLDivElement;
 const sectionAddPrestamo = $$(".add-prestamo") as HTMLDivElement;
 const sectionAddClient = $$(".add-client") as HTMLDivElement;
 const sectionTableClient = $$(".table-client") as HTMLDivElement;
@@ -26,6 +30,7 @@ tablePrestamo?.addEventListener("click", async () => {
   sectionAddPrestamo.style.display = "none";
   sectionTableClient.style.display = "none";
   sectionTablePrestamo.style.display = "block";
+  sectionTableQuotas.style.display = "none";
 });
 
 addClient?.addEventListener("click", () => {
@@ -33,6 +38,7 @@ addClient?.addEventListener("click", () => {
   sectionAddPrestamo.style.display = "none";
   sectionTableClient.style.display = "none";
   sectionTablePrestamo.style.display = "none";
+  sectionTableQuotas.style.display = "none";
 });
 addPrestamo?.addEventListener("click", () => {
   fillSelectClient();
@@ -40,6 +46,7 @@ addPrestamo?.addEventListener("click", () => {
   sectionAddPrestamo.style.display = "block";
   sectionTableClient.style.display = "none";
   sectionTablePrestamo.style.display = "none";
+  sectionTableQuotas.style.display = "none";
 });
 
 tableClient?.addEventListener("click", () => {
@@ -48,6 +55,16 @@ tableClient?.addEventListener("click", () => {
   sectionAddPrestamo.style.display = "none";
   sectionTableClient.style.display = "block";
   sectionTablePrestamo.style.display = "none";
+  sectionTableQuotas.style.display = "none";
+});
+
+tableQuotas?.addEventListener("click", () => {
+  initTableQuotas()
+  sectionAddClient.style.display = "none";
+  sectionAddPrestamo.style.display = "none";
+  sectionTableClient.style.display = "none";
+  sectionTablePrestamo.style.display = "none";
+  sectionTableQuotas.style.display = "block";
 });
 
 btnPrestamo.addEventListener("click", () => {
@@ -74,3 +91,9 @@ sectionAddClient.addEventListener("keypress", (e) => {
     checkClient();
   }
 });
+
+async function test() {
+  const list = await GetQuotasForMonth("1739577600000");
+  console.log(list);
+}
+test();

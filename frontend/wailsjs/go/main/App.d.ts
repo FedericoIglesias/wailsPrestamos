@@ -10,7 +10,7 @@ export function GetClientPopUp(arg1:string):Promise<models.ClientPopUp>;
 
 export function GetLoan(arg1:string):Promise<models.Loan>;
 
-export function GetQuotaForMonth(arg1:string):Promise<Array<models.CheckPayAndClient>>;
+export function GetQuotasForMonth(arg1:string):Promise<Array<models.CheckPayAndClient>>;
 
 export function SaveClient(arg1:models.Client):Promise<void>;
 
