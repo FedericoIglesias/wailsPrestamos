@@ -271,3 +271,27 @@ section {
 .infoPrestamo :hover {
     transform: scale(1.5);
 }
+
+#setGetQuotas{
+    padding: 10px;
+    label{
+        margin-right: 5px;
+    }
+    select{
+        margin-right: 30px;
+    }
+    input{
+        margin-right: 30px;
+        width: 100px;
+    }
+    button{
+        padding: 5px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: #555;
+    }
+}
