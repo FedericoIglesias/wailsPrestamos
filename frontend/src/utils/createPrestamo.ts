@@ -20,9 +20,9 @@ const createPrestamo = () => {
     Quota: inputCuota.value,
     Date: new Date(inputDate.value).getTime().toString(),
     ClientId: selectClient.value,
-    AmountForQuota: Math.floor(
-      totalAmount / Number(inputCuota.value)
-    ).toString(),
+    AmountForQuota: (Number(totalAmount) / Number(inputCuota.value))
+      .toFixed(2)
+      .toString(),
     TotalAmount: totalAmount.toString(),
   };
   SaveLoan(prestamo);
@@ -62,12 +62,12 @@ export const checkPrestamo = () => {
 };
 export const calculatePrestamo = () => {
   const int = Number(inputInterest.value) * Number(inputCuota.value);
-  const toPay = Math.floor(Number(inputAmount.value) * (1 + int / 100));
+  const toPay = (Number(inputAmount.value) * (1 + int / 100)).toFixed(2);
   return { int, toPay };
 };
 export const showCalculated = (toPay: number) => {
-  const amountForMonth = Math.floor(toPay / Number(inputCuota.value));
-  const intForMonth = Math.floor(toPay - Number(inputAmount.value));
+  const amountForMonth = (toPay / Number(inputCuota.value)).toFixed(2);
+  const intForMonth = (toPay - Number(inputAmount.value)).toFixed(2);
   if (descriptionPrestamo)
     return (descriptionPrestamo.innerHTML = `<div>
     <p>* Monto a devolver: <span>${toPay}</span>$</p>

@@ -78,7 +78,7 @@ sectionAddPrestamo.addEventListener("keypress", (e) => {
 
 sectionAddPrestamo.addEventListener("change", () => {
   const { toPay } = calculatePrestamo();
-  showCalculated(toPay);
+  showCalculated(Number(toPay));
 });
 
 btnClient.addEventListener("click", () => {

@@ -231,10 +231,10 @@ func (a *App) UpdateLoan(loan models.Loan) {
 	if err != nil {
 		fmt.Printf("%s", err)
 	}
-	AmountPaid := 0
+	AmountPaid := 0.0
 	for _, value := range loan.CheckPay {
 		if value.Pay {
-			pay, err := strconv.Atoi(loan.AmountForQuota)
+			pay, err := strconv.ParseFloat(loan.AmountForQuota, 64)
 			if err != nil {
 				fmt.Printf("%s", err)
 			}
@@ -242,7 +242,8 @@ func (a *App) UpdateLoan(loan models.Loan) {
 		}
 	}
 
-	loan.AmountPaid = fmt.Sprint(AmountPaid)
+	loan.AmountPaid = fmt.Sprintf("%.2f", AmountPaid)
+
 	if err = driver.Write("loans", loan.ID, loan); err != nil {
 		fmt.Printf("%s", err)
 	}
