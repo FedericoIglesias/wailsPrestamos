@@ -23,10 +23,10 @@ export const popUpClientInfo = (client: models.ClientPopUp) => {
         <p>Puesto: ${capitalize(client.Job)}</p>
       </div>
       <div>
-        <p>Información Prestamos:</p>
-        <p>Cantidad de Prestamos: ${client.LoanAmount}</p>
-        <p>Cantidad de Monto a pagar: ${AmountToPay}</p>
-        <p>Cantidad de Monto pagado: ${AmountPaid}</p>
+        <p>Información Prestamos</p>
+        <p>Cantidad de Prestamos: ${client.Loans.length}</p>
+        <p>Cantidad de Monto a pagar: ${AmountToPay.toFixed(2)} $</p>
+        <p>Cantidad de Monto pagado: ${AmountPaid.toFixed(2)} $</p>
       </div>
       <div>
         <table>
@@ -39,9 +39,7 @@ export const popUpClientInfo = (client: models.ClientPopUp) => {
             </tr>
           </thead>
           <tbody id="tbodyPrestamo">
-          ${
-            printTableLoan(client)
-          }
+          ${printTableLoan(client)}
           </tbody>
         </table>
       </div>
@@ -67,7 +65,9 @@ const printTableLoan = (client: models.ClientPopUp) => {
     text += `<tr>
               <td>${loan.Amount}</td>
               <td>${loan.Interest}</td>
-              <td>${new Date(Number(loan.Date)).toLocaleDateString("es-ES")}</td>
+              <td>${new Date(Number(loan.Date)).toLocaleDateString(
+                "es-ES"
+              )}</td>
               <td>${loan.Quota}</td>
               <td><button class="infoPrestamo" id="${
                 loan.ID + "." + client.Name + " " + client.Last_Name

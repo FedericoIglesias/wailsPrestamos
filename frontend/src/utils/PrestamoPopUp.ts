@@ -11,10 +11,17 @@ export const PopUpPrestamoInfo = (prestamo: models.Loan, client: string) => {
     <section>
     <div>
       <p>Detalles:</p>
-      <p>Monto: ${prestamo.Amount}</p>
+      <p>Monto prestado: ${prestamo.Amount} $</p>
       <p>Intereses: ${prestamo.Interest}</p>
-      <p>Fecha: ${new Date(prestamo.Date).toLocaleDateString("es-ES")}</p>
+      <p>Fecha: ${new Date(Number(prestamo.Date)).toLocaleDateString(
+        "es-ES"
+      )}</p>
       <p>Cuotas: ${prestamo.Quota}</p>
+      <p>Total: ${prestamo.TotalAmount} $</p>
+      <p>Pagado: ${prestamo.AmountPaid} $</p>
+      <p>Restante: ${(
+        Number(prestamo.TotalAmount) - Number(prestamo.AmountPaid)
+      ).toFixed(2)} $</p>
     </div>
     <div>
       <table>
