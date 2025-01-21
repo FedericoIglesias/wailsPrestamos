@@ -10,7 +10,7 @@ const inputDate = $("inputDate") as HTMLInputElement;
 const selectClient = $("selectClient") as HTMLSelectElement;
 const descriptionPrestamo = $$(".descriptionPrestamo") as HTMLDivElement;
 
-const createPrestamo = () => {
+const createPrestamo = async () => {
   const totalAmount = calculatePrestamo().toPay;
   const prestamo: models.LoanBrought = {
     ID: "P" + new Date().getTime().toString(),
@@ -25,7 +25,12 @@ const createPrestamo = () => {
       .toString(),
     TotalAmount: totalAmount.toString(),
   };
-  SaveLoan(prestamo);
+  const result = await SaveLoan(prestamo);
+  if (result) {
+    alert("Prestamo creado con exito");
+  } else {
+    alert("Error al crear el prestamo");
+  }
 
   inputAmount.value = "";
   inputInterest.value = "";

@@ -2,7 +2,6 @@ import {
   GetAllLoanTable,
   GetLoan,
   UpdateLoan,
-  
 } from "../../wailsjs/go/main/App.js";
 import { models } from "../../wailsjs/go/models.js";
 import { PopUpPrestamoInfo } from "./PrestamoPopUp.js";
@@ -66,7 +65,7 @@ export const detailsPrestamos = () => {
     }
 };
 
-export const savePrestamo = (prestamo: models.Loan) => {
+export const savePrestamo = async (prestamo: models.Loan) => {
   const listRow = Array.from(document.querySelectorAll("#miniLoanTable"));
   const listCheckPay: models.CheckPay[] = [];
   for (let row of listRow) {
@@ -87,5 +86,10 @@ export const savePrestamo = (prestamo: models.Loan) => {
     listCheckPay.push(checPay);
   }
   prestamo.CheckPay = listCheckPay;
-  UpdateLoan(prestamo);
+  const result = await UpdateLoan(prestamo);
+  if (result) {
+    alert("Prestamo Actualizado");
+  } else {
+    alert("Error al actualizar el prestamo");
+  }
 };

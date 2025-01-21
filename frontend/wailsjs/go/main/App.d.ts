@@ -12,8 +12,8 @@ export function GetLoan(arg1:string):Promise<models.Loan>;
 
 export function GetQuotasForMonth(arg1:string):Promise<Array<models.CheckPayAndClient>>;
 
-export function SaveClient(arg1:models.Client):Promise<void>;
+export function SaveClient(arg1:models.Client):Promise<boolean>;
 
-export function SaveLoan(arg1:models.LoanBrought):Promise<void>;
+export function SaveLoan(arg1:models.LoanBrought):Promise<boolean>;
 
-export function UpdateLoan(arg1:models.Loan):Promise<void>;
+export function UpdateLoan(arg1:models.Loan):Promise<boolean>;

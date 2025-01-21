@@ -57,7 +57,7 @@ export const checkClient = () => {
   return alert("Complete todos los campos");
 };
 
-const createClient = () => {
+const createClient = async () => {
   const client: models.Client = {
     ID: "C" + new Date().getTime().toString(),
     Name: inptName.value.toLowerCase(),
@@ -72,7 +72,12 @@ const createClient = () => {
     Job: inptJob.value.toLowerCase(),
     JobPlace: inptJobPlace.value.toLowerCase(),
   };
-  SaveClient(client);
+  const result = await SaveClient(client);
+  if (result) {
+    alert("Cliente creado con exito");
+  } else {
+    alert("Error al crear el cliente");
+  }
   inptName.value = "";
   inptLastName.value = "";
   inptAddress.value = "";

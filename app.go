@@ -20,17 +20,19 @@ func NewApp() *App {
 	return &App{}
 }
 
-func (a *App) SaveClient(Client models.Client) {
+func (a *App) SaveClient(Client models.Client) bool {
 	driver, err := local_db.New("./db", nil)
 
 	if err != nil {
 		fmt.Printf("%s", err)
+		return false
 	}
 	err = driver.Write("clients", Client.ID, Client)
 	if err != nil {
 		fmt.Printf("%s", err)
+		return false
 	}
-
+	return true
 }
 
 func (a *App) GetAllClient() []models.Client {
@@ -61,10 +63,11 @@ func (a *App) GetAllClient() []models.Client {
 	return listClient
 }
 
-func (a *App) SaveLoan(loan models.LoanBrought) {
+func (a *App) SaveLoan(loan models.LoanBrought) bool {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		fmt.Printf("%s", err)
+		return false
 	}
 
 	listCheckPay := FillQuote(loan.Quota, loan.Date)
@@ -85,8 +88,9 @@ func (a *App) SaveLoan(loan models.LoanBrought) {
 
 	if err != nil {
 		fmt.Println(err)
+		return false
 	}
-
+	return true
 }
 
 func (a *App) GetAllLoanTable() []models.LoanTable {
@@ -226,10 +230,11 @@ func (a *App) GetLoan(ID string) *models.Loan {
 	return loan
 }
 
-func (a *App) UpdateLoan(loan models.Loan) {
+func (a *App) UpdateLoan(loan models.Loan) bool {
 	driver, err := local_db.New("./db", nil)
 	if err != nil {
 		fmt.Printf("%s", err)
+		return false
 	}
 	AmountPaid := 0.0
 	for _, value := range loan.CheckPay {
@@ -246,7 +251,9 @@ func (a *App) UpdateLoan(loan models.Loan) {
 
 	if err = driver.Write("loans", loan.ID, loan); err != nil {
 		fmt.Printf("%s", err)
+		return false
 	}
+	return true
 }
 
 func (a *App) GetQuotasForMonth(date string) ([]models.CheckPayAndClient, error) {
